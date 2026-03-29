@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiwilu para Nutriólogas — Tú consultas. Nosotros cocinamos.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --e:#0F7A5A;
+  --ed:#084D38;
+  --el:#E6F5F0;
+  --em:#3DAB84;
+  --gold:#C4973A;
+  --goldd:#9B7128;
+  --goldl:#FBF4E6;
+  --off:#F8F7F3;
+  --dark:#141412;
+  --mid:#5E5D59;
+  --light:#B0AFA8;
+  --white:#FFFFFF;
+}
+body{font-family:'Outfit',sans-serif;background:var(--off);color:var(--dark);overflow-x:hidden}
+
+/* ── NAV ── */
+nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 52px;background:rgba(248,247,243,.95);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);
+}
+.logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--ed);text-decoration:none}
+.logo span{color:var(--gold)}
+.navlinks{display:flex;gap:28px;align-items:center}
+.navlinks a{font-size:13.5px;color:var(--mid);text-decoration:none;font-weight:400;transition:color .2s}
+.navlinks a:hover{color:var(--e)}
+.nav-cta{background:var(--e);color:#fff;padding:9px 24px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--ed)}
+
+/* ── HERO ── */
+.hero{
+  background:var(--ed);min-height:88vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  overflow:hidden;position:relative;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(196,151,58,.14) 0%, transparent 45%),
+    radial-gradient(circle at 10% 85%, rgba(61,171,132,.12) 0%, transparent 40%);
+}
+.hero-text{
+  padding:80px 56px 80px 52px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:1;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(196,151,58,.15);border:1px solid rgba(196,151,58,.25);
+  color:var(--gold);font-size:11px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;padding:6px 16px;border-radius:100px;
+  margin-bottom:28px;width:fit-content;
+}
+.hero-badge::before{content:'🩺';font-size:13px}
+h1{
+  font-family:'Cormorant Garamond',serif;font-size:58px;
+  line-height:1.06;font-weight:600;color:#fff;margin-bottom:10px;
+}
+h1 em{color:var(--em);font-style:italic}
+.hero-accent{
+  font-family:'Cormorant Garamond',serif;font-size:58px;
+  line-height:1.06;font-weight:400;font-style:italic;
+  color:rgba(255,255,255,.35);margin-bottom:30px;
+}
+.hero-desc{
+  font-size:16.5px;color:rgba(255,255,255,.65);line-height:1.75;
+  font-weight:300;max-width:460px;margin-bottom:44px;
+}
+.hero-desc strong{color:#fff;font-weight:500}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-gold{
+  background:var(--gold);color:var(--dark);padding:14px 34px;
+  border-radius:100px;font-size:15px;font-weight:600;
+  text-decoration:none;transition:all .2s;
+}
+.btn-gold:hover{background:#d4a840}
+.btn-ghost{
+  background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);
+  padding:14px 28px;border-radius:100px;font-size:15px;
+  border:1px solid rgba(255,255,255,.15);
+  text-decoration:none;transition:all .2s;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.15)}
+.hero-stat-row{
+  display:flex;gap:28px;margin-top:40px;
+  padding-top:32px;border-top:1px solid rgba(255,255,255,.1);
+  flex-wrap:wrap;
+}
+.hstat{}
+.hstat-v{
+  font-family:'Cormorant Garamond',serif;font-size:34px;
+  font-weight:600;color:#fff;line-height:1;
+}
+.hstat-l{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;font-weight:300}
+
+/* hero right — visual */
+.hero-visual{
+  display:flex;align-items:center;justify-content:center;
+  padding:60px 52px 60px 40px;position:relative;z-index:1;
+}
+.flow-card{
+  width:320px;display:flex;flex-direction:column;gap:12px;
+}
+.fc-step{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;padding:20px 22px;
+  display:flex;align-items:flex-start;gap:16px;
+  transition:all .3s;
+}
+.fc-step:hover{background:rgba(255,255,255,.12);transform:translateX(4px)}
+.fc-num{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+  font-family:'Cormorant Garamond',serif;
+}
+.num-gold{background:rgba(196,151,58,.25);color:var(--gold);border:1px solid rgba(196,151,58,.3)}
+.num-green{background:rgba(61,171,132,.2);color:var(--em);border:1px solid rgba(61,171,132,.25)}
+.fc-body{}
+.fc-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}
+.lbl-gold{color:var(--gold)}
+.lbl-green{color:var(--em)}
+.fc-title{font-size:14px;font-weight:500;color:#fff;line-height:1.35;margin-bottom:4px}
+.fc-sub{font-size:12px;color:rgba(255,255,255,.4);font-weight:300;line-height:1.5}
+.fc-arrow{
+  text-align:center;color:rgba(255,255,255,.15);font-size:20px;
+  padding:2px 0;
+}
+.fc-result{
+  background:linear-gradient(135deg,rgba(196,151,58,.15),rgba(196,151,58,.06));
+  border:1px solid rgba(196,151,58,.3);
+  border-radius:18px;padding:20px 22px;text-align:center;
+}
+.fc-result-icon{font-size:28px;margin-bottom:8px}
+.fc-result-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#fff;margin-bottom:4px}
+.fc-result-sub{font-size:12px;color:rgba(255,255,255,.45);font-weight:300}
+
+/* ── SECCIONES GENERALES ── */
+.s-eyebrow{
+  font-size:11px;color:var(--gold);text-transform:uppercase;
+  letter-spacing:.14em;font-weight:600;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.s-eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gold)}
+.s-title{
+  font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;
+  color:var(--dark);line-height:1.1;margin-bottom:16px;
+}
+.s-title em{color:var(--e);font-style:italic}
+.s-sub{
+  font-size:16px;color:var(--mid);line-height:1.7;font-weight:300;
+  max-width:580px;margin-bottom:56px;
+}
+
+/* ── PROBLEMA → SOLUCIÓN ── */
+section.tension{padding:88px 52px;background:#fff}
+.tension-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.tension-col{}
+.tension-head{
+  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:24px;display:flex;align-items:center;gap:8px;
+}
+.th-before{color:#C0392B}
+.th-before::before{content:'';width:16px;height:1.5px;background:#C0392B;display:inline-block}
+.th-after{color:var(--e)}
+.th-after::before{content:'';width:16px;height:1.5px;background:var(--e);display:inline-block}
+.tension-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 0;border-bottom:1px solid rgba(0,0,0,.05);
+}
+.tension-item:last-child{border-bottom:none}
+.ti-icon{
+  width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:13px;
+}
+.ti-bad{background:#FEF0EE}
+.ti-good{background:var(--el)}
+.ti-text{}
+.ti-head{font-size:14px;font-weight:500;color:var(--dark);margin-bottom:3px}
+.ti-sub{font-size:13px;color:var(--mid);font-weight:300;line-height:1.5}
+
+/* ── BENEFICIOS ── */
+section.benefits{padding:88px 52px;background:var(--off)}
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.bcard{
+  background:#fff;border-radius:22px;padding:32px 28px;
+  border:1px solid rgba(0,0,0,.05);
+  transition:transform .22s,box-shadow .22s;
+}
+.bcard:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
+.bcard-icon{font-size:32px;margin-bottom:18px}
+.bcard-title{font-size:16px;font-weight:600;color:var(--dark);margin-bottom:10px;line-height:1.3}
+.bcard-desc{font-size:13.5px;color:var(--mid);line-height:1.65;font-weight:300}
+.bcard-proof{
+  margin-top:18px;padding-top:14px;border-top:1px solid rgba(0,0,0,.05);
+  font-size:12px;color:var(--e);font-weight:500;
+  display:flex;align-items:center;gap:6px;
+}
+.bcard-proof::before{content:'';width:12px;height:1.5px;background:var(--e)}
+
+/* ── CÓMO FUNCIONA ── */
+section.how{padding:88px 52px;background:#fff}
+.how-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.how-steps{display:flex;flex-direction:column;gap:0}
+.hstep{
+  display:flex;gap:20px;align-items:flex-start;
+  padding:24px 0;border-bottom:1px solid rgba(0,0,0,.05);
+  position:relative;
+}
+.hstep:last-child{border-bottom:none}
+.hstep-num{
+  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  background:var(--el);color:var(--e);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;
+  border:1.5px solid rgba(15,122,90,.2);
+}
+.hstep-body{}
+.hstep-title{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:6px}
+.hstep-desc{font-size:13.5px;color:var(--mid);line-height:1.6;font-weight:300}
+.hstep-tag{
+  display:inline-block;margin-top:8px;font-size:11px;
+  color:var(--e);background:var(--el);
+  padding:3px 11px;border-radius:100px;font-weight:500;
+}
+
+/* right — mock "envío de plan" */
+.plan-mock{
+  background:var(--ed);border-radius:28px;padding:32px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.pm-header{
+  display:flex;align-items:center;gap:10px;
+  padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.1);
+}
+.pm-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--em),var(--ed));
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:600;color:#fff;
+}
+.pm-nut-name{font-size:13px;font-weight:500;color:#fff}
+.pm-nut-role{font-size:11px;color:rgba(255,255,255,.4)}
+.pm-badge{
+  margin-left:auto;font-size:10px;font-weight:600;
+  background:rgba(61,171,132,.2);color:var(--em);
+  padding:3px 10px;border-radius:100px;
+}
+.pm-week{
+  font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;
+  letter-spacing:.1em;font-weight:600;margin-bottom:4px;
+}
+.pm-title{font-size:14px;font-weight:500;color:#fff;margin-bottom:12px}
+.pm-day{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:12px 16px;
+}
+.pm-day-head{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:8px;
+}
+.pm-day-name{font-size:12px;font-weight:600;color:rgba(255,255,255,.7)}
+.pm-day-kcal{font-size:11px;color:rgba(255,255,255,.35)}
+.pm-meal{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 0;font-size:11px;color:rgba(255,255,255,.55);
+}
+.pm-dot{width:5px;height:5px;border-radius:50%;background:var(--em);flex-shrink:0}
+.pm-meal-name{flex:1}
+.pm-meal-g{color:rgba(255,255,255,.25)}
+.pm-send{
+  margin-top:4px;background:var(--gold);border-radius:12px;
+  padding:12px 16px;display:flex;justify-content:space-between;align-items:center;
+}
+.pm-send-txt{font-size:13px;font-weight:600;color:var(--dark)}
+.pm-send-sub{font-size:10px;color:rgba(20,20,18,.55);margin-top:2px}
+.pm-send-icon{font-size:20px}
+
+/* ── MODELO / QUÉ INCLUYE ── */
+section.modelo{padding:88px 52px;background:var(--off)}
+.modelo-inner{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.modelo-list{display:flex;flex-direction:column;gap:0}
+.ml-item{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:18px 0;border-bottom:1px solid rgba(0,0,0,.06);
+}
+.ml-item:last-child{border-bottom:none}
+.ml-icon{
+  width:40px;height:40px;border-radius:12px;background:var(--el);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.ml-body{}
+.ml-head{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:4px}
+.ml-desc{font-size:13px;color:var(--mid);line-height:1.55;font-weight:300}
+
+/* tarjeta "Tu marca" */
+.brand-card{
+  background:#fff;border-radius:24px;padding:36px;
+  border:1px solid rgba(0,0,0,.06);
+  display:flex;flex-direction:column;gap:20px;
+}
+.bc-eyebrow{
+  font-size:10px;color:var(--gold);text-transform:uppercase;
+  letter-spacing:.14em;font-weight:600;
+}
+.bc-title{
+  font-family:'Cormorant Garamond',serif;font-size:26px;
+  font-weight:600;color:var(--dark);line-height:1.2;
+}
+.bc-title em{color:var(--e);font-style:italic}
+.bc-desc{font-size:14px;color:var(--mid);font-weight:300;line-height:1.65}
+.bc-items{display:flex;flex-direction:column;gap:10px}
+.bc-item{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;color:var(--mid);
+}
+.bc-check{
+  width:20px;height:20px;border-radius:50%;background:var(--el);
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:var(--e);font-weight:700;flex-shrink:0;
+}
+.bc-cta{
+  background:var(--ed);color:#fff;padding:14px 28px;
+  border-radius:100px;font-size:14px;font-weight:500;
+  text-decoration:none;text-align:center;transition:background .2s;
+}
+.bc-cta:hover{background:var(--e)}
+
+/* ── REQUISITOS ── */
+section.requisitos{padding:88px 52px;background:#fff}
+.req-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:48px}
+.rcard{
+  border-radius:20px;padding:28px;border:1px solid rgba(0,0,0,.07);
+}
+.rcard-num{
+  font-family:'Cormorant Garamond',serif;font-size:48px;
+  font-style:italic;font-weight:400;color:var(--el);line-height:1;margin-bottom:12px;
+}
+.rcard-title{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:8px}
+.rcard-desc{font-size:13px;color:var(--mid);line-height:1.6;font-weight:300}
+.rcard-status{
+  margin-top:14px;font-size:11px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.1em;display:inline-flex;align-items:center;gap:6px;
+}
+.rs-yes{color:var(--e)}
+.rs-yes::before{content:'✓';width:16px;height:16px;border-radius:50%;background:var(--el);display:inline-flex;align-items:center;justify-content:center;font-size:9px}
+.rs-no{color:var(--light)}
+.rs-no::before{content:'—';font-size:14px}
+.req-note{
+  background:var(--goldl);border:1px solid rgba(196,151,58,.2);
+  border-radius:16px;padding:24px 28px;
+  display:flex;align-items:flex-start;gap:16px;
+}
+.req-note-icon{font-size:24px}
+.req-note-text{font-size:14px;color:var(--mid);line-height:1.65;font-weight:300}
+.req-note-text strong{color:var(--dark);font-weight:600}
+
+/* ── PREGUNTAS FRECUENTES ── */
+section.faq{padding:88px 52px;background:var(--off)}
+.faq-layout{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.faq-intro{}
+.faq-intro .s-title{margin-bottom:20px}
+.faq-intro-desc{font-size:15px;color:var(--mid);line-height:1.7;font-weight:300;margin-bottom:32px}
+.faq-cta{
+  background:var(--e);color:#fff;padding:13px 28px;
+  border-radius:100px;font-size:14px;font-weight:500;
+  text-decoration:none;display:inline-block;transition:background .2s;
+}
+.faq-cta:hover{background:var(--ed)}
+.faq-list{display:flex;flex-direction:column;gap:4px}
+.faq-item{
+  border-radius:14px;overflow:hidden;
+  border:1px solid rgba(0,0,0,.06);
+  background:#fff;
+}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 22px;cursor:pointer;
+  font-size:14px;font-weight:500;color:var(--dark);
+  user-select:none;
+}
+.faq-q:hover{color:var(--e)}
+.faq-icon{
+  width:22px;height:22px;border-radius:50%;background:var(--el);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--e);transition:transform .2s;flex-shrink:0;
+}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;
+  font-size:13.5px;color:var(--mid);line-height:1.65;font-weight:300;
+}
+.faq-a.open{max-height:200px;padding:0 22px 18px}
+.faq-icon.open{transform:rotate(45deg)}
+
+/* ── TESTIMONIALES ── */
+section.testi{padding:88px 52px;background:var(--ed)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tcard{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:22px;padding:30px;
+}
+.tcard-stars{color:var(--gold);font-size:14px;margin-bottom:14px;letter-spacing:2px}
+.tcard-quote{
+  font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;
+  color:rgba(255,255,255,.85);line-height:1.6;margin-bottom:20px;
+}
+.tcard-divider{width:24px;height:1.5px;background:var(--gold);margin-bottom:14px}
+.tcard-name{font-size:14px;font-weight:600;color:#fff}
+.tcard-role{font-size:12px;color:rgba(255,255,255,.4);margin-top:3px;font-weight:300}
+
+/* ── CTA FINAL ── */
+section.cta-final{
+  padding:110px 52px;
+  background:linear-gradient(160deg,var(--off) 0%,var(--goldl) 100%);
+  text-align:center;
+}
+.cta-final .s-eyebrow{justify-content:center}
+.cta-title{
+  font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;
+  color:var(--dark);line-height:1.06;margin-bottom:20px;
+}
+.cta-title em{color:var(--e);font-style:italic}
+.cta-sub{
+  font-size:16.5px;color:var(--mid);line-height:1.7;max-width:520px;
+  margin:0 auto 44px;font-weight:300;
+}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  background:var(--e);color:#fff;padding:15px 38px;
+  border-radius:100px;font-size:15px;font-weight:600;
+  text-decoration:none;transition:background .2s;
+}
+.btn-primary:hover{background:var(--ed)}
+.btn-outline{
+  background:transparent;color:var(--dark);padding:15px 30px;
+  border-radius:100px;font-size:15px;border:1.5px solid rgba(0,0,0,.18);
+  text-decoration:none;transition:all .2s;
+}
+.btn-outline:hover{border-color:var(--e);color:var(--e)}
+.cta-guarantee{
+  margin-top:28px;font-size:13px;color:var(--light);
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.cta-guarantee::before{content:'✓';color:var(--e);font-weight:700}
+
+/* ── STRIP / FOOTER ── */
+.strip{
+  background:var(--dark);padding:22px 52px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+}
+.strip-left{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-style:italic}
+.strip-left span{color:var(--em)}
+.strip-links{display:flex;gap:24px}
+.strip-links a{font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+.strip-links a:hover{color:#fff}
+footer{
+  padding:40px 52px;background:var(--off);
+  border-top:1px solid rgba(0,0,0,.07);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+.flogo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ed)}
+.flogo span{color:var(--gold)}
+.flinks{display:flex;gap:20px;flex-wrap:wrap}
+.flinks a{font-size:13px;color:var(--light);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--e)}
+.ftxt{font-size:12px;color:var(--light)}
+
+/* ── ANIMACIONES ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-text>*{animation:fadeUp .6s ease both}
+.hero-badge{animation-delay:.05s}
+h1{animation-delay:.12s}
+.hero-accent{animation-delay:.17s}
+.hero-desc{animation-delay:.23s}
+.hero-actions{animation-delay:.3s}
+.hero-stat-row{animation-delay:.38s}
+.flow-card{animation:fadeUp .7s .2s ease both}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:16px 24px}
+  .navlinks{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-text{padding:52px 24px}
+  .hero-visual{padding:0 24px 52px}
+  h1,.hero-accent{font-size:40px}
+  .tension-grid,.how-layout,.modelo-inner,.faq-layout{grid-template-columns:1fr}
+  .ben-grid,.req-grid,.testi-grid{grid-template-columns:1fr}
+  section.tension,section.benefits,section.how,section.modelo,
+  section.requisitos,section.faq,section.testi,section.cta-final{padding:56px 24px}
+  .s-title{font-size:34px}
+  .cta-title{font-size:38px}
+  footer,.strip{padding:20px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="logo">Kiwi<span>lu</span></a>
+  <div class="navlinks">
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#requisitos">Requisitos</a>
+    <a href="#faq">Preguntas</a>
+    <a href="registro.html" class="nav-cta">Únete como aliada →</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Portal para nutriólogas</div>
+    <h1>Tú consultas<br>y haces<br><em>el plan.</em></h1>
+    <div class="hero-accent">Nosotros lo cocinamos.</div>
+    <p class="hero-desc">
+      El mayor obstáculo para que tus pacientes cumplan el tratamiento no es el conocimiento —
+      es la cocina. <strong>Kiwilu lo resuelve sin que cambies nada de tu práctica.</strong>
+    </p>
+    <div class="hero-actions">
+      <a href="registro.html" class="btn-gold">Quiero ser nutrióloga aliada →</a>
+      <a href="#como-funciona" class="btn-ghost">Cómo funciona</a>
+    </div>
+    <div class="hero-stat-row">
+      <div class="hstat">
+        <div class="hstat-v">3× </div>
+        <div class="hstat-l">mayor adherencia<br>al plan nutricional</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-v">0</div>
+        <div class="hstat-l">inversión inicial<br>para unirte</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-v">100%</div>
+        <div class="hstat-l">fiel a lo que<br>tú prescribiste</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="flow-card">
+      <div class="fc-step">
+        <div class="fc-num num-gold">1</div>
+        <div class="fc-body">
+          <div class="fc-label lbl-gold">Tu trabajo</div>
+          <div class="fc-title">Diseñas el plan alimenticio de tu paciente</div>
+          <div class="fc-sub">Exactamente como siempre — tu criterio clínico, tus indicaciones, tus gramos.</div>
+        </div>
+      </div>
+      <div class="fc-arrow">↓</div>
+      <div class="fc-step">
+        <div class="fc-num num-gold">2</div>
+        <div class="fc-body">
+          <div class="fc-label lbl-gold">Un paso extra</div>
+          <div class="fc-title">Nos lo envías por WhatsApp o correo</div>
+          <div class="fc-sub">Sin plataformas complicadas. Un mensaje con el plan de la semana es suficiente.</div>
+        </div>
+      </div>
+      <div class="fc-arrow">↓</div>
+      <div class="fc-step">
+        <div class="fc-num num-green">3</div>
+        <div class="fc-body">
+          <div class="fc-label lbl-green">Kiwilu</div>
+          <div class="fc-title">Cocinamos exactamente lo que indicaste</div>
+          <div class="fc-sub">Sin sustituciones. Sin adaptar. Tal como lo diseñaste para ese paciente específico.</div>
+        </div>
+      </div>
+      <div class="fc-arrow">↓</div>
+      <div class="fc-result">
+        <div class="fc-result-icon">🎯</div>
+        <div class="fc-result-title">Tu paciente cumple el plan</div>
+        <div class="fc-result-sub">Recoge en Escápate Café · Llega a su próxima consulta con resultados</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ANTES / DESPUÉS ── -->
+<section class="tension">
+  <div class="s-eyebrow">El problema que ya conoces</div>
+  <h2 class="s-title">El plan es perfecto.<br>La <em>cocina</em> es el problema.</h2>
+  <p class="s-sub">Lo escuchas en cada consulta de seguimiento. Tus pacientes no fallan por falta de voluntad — fallan porque cocinar sano todos los días es difícil.</p>
+  <div class="tension-grid">
+    <div class="tension-col">
+      <div class="tension-head th-before">Sin Kiwilu</div>
+      <div class="tension-item">
+        <div class="ti-icon ti-bad">😔</div>
+        <div class="ti-text">
+          <div class="ti-head">"No tuve tiempo de cocinar"</div>
+          <div class="ti-sub">El pretexto más común en consultas de seguimiento. Tu plan es correcto — la ejecución falla.</div>
+        </div>
+      </div>
+      <div class="tension-item">
+        <div class="ti-icon ti-bad">📉</div>
+        <div class="ti-text">
+          <div class="ti-head">Resultados inconsistentes</div>
+          <div class="ti-sub">El paciente sigue el plan tres días, improvisa dos, y los resultados que ves no reflejan tu trabajo real.</div>
+        </div>
+      </div>
+      <div class="tension-item">
+        <div class="ti-icon ti-bad">🔄</div>
+        <div class="ti-text">
+          <div class="ti-head">Explicar lo mismo en cada consulta</div>
+          <div class="ti-sub">Repites preparaciones, substituciones y medidas porque la semana anterior no se cumplió.</div>
+        </div>
+      </div>
+      <div class="tension-item">
+        <div class="ti-icon ti-bad">😮‍💨</div>
+        <div class="ti-text">
+          <div class="ti-head">Frustración compartida</div>
+          <div class="ti-sub">Tú sabes que el plan funciona. El paciente lo sabe. El obstáculo no es el conocimiento.</div>
+        </div>
+      </div>
+    </div>
+    <div class="tension-col">
+      <div class="tension-head th-after">Con Kiwilu</div>
+      <div class="tension-item">
+        <div class="ti-icon ti-good">✅</div>
+        <div class="ti-text">
+          <div class="ti-head">El plan ya está cocinado</div>
+          <div class="ti-sub">Tu paciente solo tiene que ir a recoger. La barrera de la cocina desaparece por completo.</div>
+        </div>
+      </div>
+      <div class="tension-item">
+        <div class="ti-icon ti-good">📈</div>
+        <div class="ti-text">
+          <div class="ti-head">Resultados que reflejan tu trabajo</div>
+          <div class="ti-sub">Con adherencia real al plan, las métricas en consulta muestran lo que tu intervención puede lograr.</div>
+        </div>
+      </div>
+      <div class="tension-item">
+        <div class="ti-icon ti-good">⏩</div>
+        <div class="ti-text">
+          <div class="ti-head">Consultas de seguimiento productivas</div>
+          <div class="ti-sub">Avanzas con tu protocolo en lugar de volver a lo básico. Más tiempo para ajustar y profundizar.</div>
+        </div>
+      </div>
+      <div class="tension-item">
+        <div class="ti-icon ti-good">⭐</div>
+        <div class="ti-text">
+          <div class="ti-head">Tu nombre asociado a resultados reales</div>
+          <div class="ti-sub">Cada contenedor sale con tu nombre. Tus pacientes comparten los resultados — y te recomiendan.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BENEFICIOS ── -->
+<section class="benefits" id="beneficios">
+  <div class="s-eyebrow">Por qué unirte</div>
+  <h2 class="s-title">Lo que ganas como<br><em>nutrióloga aliada.</em></h2>
+  <p class="s-sub">No es solo un servicio de cocina — es una extensión de tu práctica profesional que trabaja mientras tú consultas.</p>
+  <div class="ben-grid">
+    <div class="bcard">
+      <div class="bcard-icon">🎯</div>
+      <div class="bcard-title">Mayor adherencia al tratamiento</div>
+      <div class="bcard-desc">Cuando el obstáculo de cocinar desaparece, tus pacientes siguen el plan los 7 días. Los resultados que mides en consulta reflejan tu trabajo real, no el promedio de tres días buenos.</div>
+      <div class="bcard-proof">Hasta 3× más adherencia reportada</div>
+    </div>
+    <div class="bcard">
+      <div class="bcard-icon">🏷️</div>
+      <div class="bcard-title">Tu marca en cada comida</div>
+      <div class="bcard-desc">Cada contenedor que recoge tu paciente lleva tu nombre. No es comida anónima — es la dieta de la Lic. [Tu Nombre]. Eso refuerza tu autoridad y genera recomendaciones orgánicas.</div>
+      <div class="bcard-proof">Branding sin costo adicional</div>
+    </div>
+    <div class="bcard">
+      <div class="bcard-icon">💡</div>
+      <div class="bcard-title">Propuesta de valor diferenciada</div>
+      <div class="bcard-desc">En Saltillo hay varias nutriólogas. Las aliadas de Kiwilu ofrecen algo único: un plan que no solo se prescribe — se cocina. Eso te distingue sin cambiar cómo trabajas.</div>
+      <div class="bcard-proof">Diferenciador competitivo inmediato</div>
+    </div>
+    <div class="bcard">
+      <div class="bcard-icon">🤝</div>
+      <div class="bcard-title">Sin cambiar tu práctica</div>
+      <div class="bcard-desc">Consultas igual. Prescribes igual. Solo agregas un paso: enviarnos el plan. No hay app que aprender, no hay plataforma complicada, no hay inversión en infraestructura.</div>
+      <div class="bcard-proof">Integración en menos de un día</div>
+    </div>
+    <div class="bcard">
+      <div class="bcard-icon">📊</div>
+      <div class="bcard-title">Mejores datos de seguimiento</div>
+      <div class="bcard-desc">Cuando el paciente cumple fielmente, los datos que recopilas en consulta son limpios. Puedes medir el impacto real de tu intervención nutricional sin el ruido de la improvisación.</div>
+      <div class="bcard-proof">Seguimientos más precisos</div>
+    </div>
+    <div class="bcard">
+      <div class="bcard-icon">🌱</div>
+      <div class="bcard-title">Parte del ecosistema Nutrilú</div>
+      <div class="bcard-desc">Kiwilu es parte de un ecosistema de nutrición en Saltillo. Al unirte como aliada, tu nombre aparece en nuestra red de profesionales recomendados y en el directorio de nutriólogas Nutrilú.</div>
+      <div class="bcard-proof">Visibilidad en el ecosistema</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CÓMO FUNCIONA ── -->
+<section class="how" id="como-funciona">
+  <div class="how-layout">
+    <div>
+      <div class="s-eyebrow">El proceso</div>
+      <h2 class="s-title">Simple de tu lado.<br><em>Preciso</em> del nuestro.</h2>
+      <p class="s-sub" style="margin-bottom:0">Tu trabajo no cambia. Solo añades el puente entre el plan y el plato.</p>
+      <div class="how-steps" style="margin-top:36px">
+        <div class="hstep">
+          <div class="hstep-num">1</div>
+          <div class="hstep-body">
+            <div class="hstep-title">Te registras como aliada</div>
+            <div class="hstep-desc">Llenas el formulario de registro, nos cuentas sobre tu práctica y en 24–48 horas te confirmamos como nutrióloga aliada Kiwilu.</div>
+            <span class="hstep-tag">Una sola vez</span>
+          </div>
+        </div>
+        <div class="hstep">
+          <div class="hstep-num">2</div>
+          <div class="hstep-body">
+            <div class="hstep-title">Diseñas el plan como siempre</div>
+            <div class="hstep-desc">En consulta, creas el plan alimenticio personalizado para tu paciente. Sin formatos especiales — solo tu plan habitual.</div>
+            <span class="hstep-tag">Tu criterio clínico</span>
+          </div>
+        </div>
+        <div class="hstep">
+          <div class="hstep-num">3</div>
+          <div class="hstep-body">
+            <div class="hstep-title">Nos envías el plan</div>
+            <div class="hstep-desc">Por WhatsApp o correo, antes del lunes de cada semana. Indicamos ingredientes, cantidades, método de cocción y comidas del día.</div>
+            <span class="hstep-tag">WhatsApp o correo</span>
+          </div>
+        </div>
+        <div class="hstep">
+          <div class="hstep-num">4</div>
+          <div class="hstep-body">
+            <div class="hstep-title">Cocinamos y tu paciente recoge</div>
+            <div class="hstep-desc">Preparamos exactamente lo que indicaste. Tu paciente recoge en Escápate Café con su nombre en el contenedor. Sin intermediarios.</div>
+            <span class="hstep-tag">Escápate Café · Saltillo</span>
+          </div>
+        </div>
+        <div class="hstep">
+          <div class="hstep-num">5</div>
+          <div class="hstep-body">
+            <div class="hstep-title">Tu paciente llega a consulta con resultados</div>
+            <div class="hstep-desc">En la siguiente consulta de seguimiento, mides el impacto de un plan que sí se cumplió. Los números hablan por tu trabajo.</div>
+            <span class="hstep-tag">Resultados medibles</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mock "envío de plan" -->
+    <div class="plan-mock">
+      <div class="pm-header">
+        <div class="pm-avatar">LG</div>
+        <div>
+          <div class="pm-nut-name">Lic. Laura González</div>
+          <div class="pm-nut-role">Nutrióloga aliada · Kiwilu</div>
+        </div>
+        <div class="pm-badge">Activa</div>
+      </div>
+      <div>
+        <div class="pm-week">Semana del 31 marzo – 4 abril</div>
+        <div class="pm-title">Plan: Paciente Sofía R. — 1,200 kcal/día</div>
+      </div>
+      <div class="pm-day">
+        <div class="pm-day-head">
+          <div class="pm-day-name">Lunes</div>
+          <div class="pm-day-kcal">1,200 kcal · 3 tiempos</div>
+        </div>
+        <div class="pm-meal"><div class="pm-dot"></div><div class="pm-meal-name">Avena con fresas sin azúcar</div><div class="pm-meal-g">280 kcal</div></div>
+        <div class="pm-meal"><div class="pm-dot"></div><div class="pm-meal-name">Pollo a la plancha + arroz integral 60g + espinacas</div><div class="pm-meal-g">470 kcal</div></div>
+        <div class="pm-meal"><div class="pm-dot"></div><div class="pm-meal-name">Ensalada de atún con verdura cruda</div><div class="pm-meal-g">310 kcal</div></div>
+      </div>
+      <div class="pm-day">
+        <div class="pm-day-head">
+          <div class="pm-day-name">Martes</div>
+          <div class="pm-day-kcal">1,200 kcal · 3 tiempos</div>
+        </div>
+        <div class="pm-meal"><div class="pm-dot"></div><div class="pm-meal-name">Huevos revueltos con nopales · 2 piezas</div><div class="pm-meal-g">260 kcal</div></div>
+        <div class="pm-meal"><div class="pm-dot"></div><div class="pm-meal-name">Salmón al horno + quinoa 50g + brócoli</div><div class="pm-meal-g">510 kcal</div></div>
+        <div class="pm-meal"><div class="pm-dot"></div><div class="pm-meal-name">Crema de zanahoria sin crema + tostadas integrales</div><div class="pm-meal-g">280 kcal</div></div>
+      </div>
+      <div class="pm-send">
+        <div>
+          <div class="pm-send-txt">📤 Enviando plan a Kiwilu</div>
+          <div class="pm-send-sub">5 días · Lunes antes de las 9 am · WhatsApp</div>
+        </div>
+        <div class="pm-send-icon">✓</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MODELO / QUÉ INCLUYE ── -->
+<section class="modelo" id="modelo">
+  <div class="modelo-inner">
+    <div>
+      <div class="s-eyebrow">El modelo de alianza</div>
+      <h2 class="s-title">Qué incluye ser<br><em>nutrióloga aliada.</em></h2>
+      <p class="s-sub" style="margin-bottom:0">Todo lo que necesitas para ofrecer Kiwilu a tus pacientes desde el primer día.</p>
+      <div class="modelo-list" style="margin-top:36px">
+        <div class="ml-item">
+          <div class="ml-icon">📋</div>
+          <div class="ml-body">
+            <div class="ml-head">Perfil profesional en Kiwilu</div>
+            <div class="ml-desc">Tu nombre, especialidad y foto aparecen en nuestra plataforma. Los pacientes ven quién diseñó su plan.</div>
+          </div>
+        </div>
+        <div class="ml-item">
+          <div class="ml-icon">🏷️</div>
+          <div class="ml-body">
+            <div class="ml-head">Tu marca en cada contenedor</div>
+            <div class="ml-desc">Cada entrega incluye una etiqueta con tu nombre y la leyenda "Plan diseñado por [Tu Nombre]".</div>
+          </div>
+        </div>
+        <div class="ml-item">
+          <div class="ml-icon">📲</div>
+          <div class="ml-body">
+            <div class="ml-head">Coordinación por WhatsApp</div>
+            <div class="ml-desc">Canal directo con nuestro equipo de cocina. Sin portales complicados — solo el plan y nosotros lo ejecutamos.</div>
+          </div>
+        </div>
+        <div class="ml-item">
+          <div class="ml-icon">🌐</div>
+          <div class="ml-body">
+            <div class="ml-head">Directorio de aliadas Nutrilú</div>
+            <div class="ml-desc">Apareces en el directorio de nutriólogas del ecosistema Nutrilú en Saltillo, visible para nuevos pacientes.</div>
+          </div>
+        </div>
+        <div class="ml-item">
+          <div class="ml-icon">📊</div>
+          <div class="ml-body">
+            <div class="ml-head">Reporte semanal de pacientes activos</div>
+            <div class="ml-desc">Te informamos cuántos pacientes tuyos están activos, cuántos planes se cocinaron y cualquier observación del proceso.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-card">
+      <div class="bc-eyebrow">Tu nombre. Tu marca. Tu resultado.</div>
+      <div class="bc-title">La nutrióloga<br>es parte<br><em>del producto.</em></div>
+      <div class="bc-desc">Kiwilu no reemplaza tu consulta — la amplifica. Cada paciente que recoge su comida recuerda que fue su nutrióloga quien diseñó exactamente eso para ellos.</div>
+      <div class="bc-items">
+        <div class="bc-item"><div class="bc-check">✓</div>Tu nombre en la etiqueta de cada comida</div>
+        <div class="bc-item"><div class="bc-check">✓</div>Perfil visible en kiwilu.co</div>
+        <div class="bc-item"><div class="bc-check">✓</div>Directorio de aliadas Nutrilú</div>
+        <div class="bc-item"><div class="bc-check">✓</div>Tus pacientes te recomiendan más</div>
+        <div class="bc-item"><div class="bc-check">✓</div>Sin costo para ti — lo paga el paciente</div>
+      </div>
+      <a href="registro.html" class="bc-cta">Registrarme como aliada →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── REQUISITOS ── -->
+<section class="requisitos" id="requisitos">
+  <div class="s-eyebrow">Quién puede unirse</div>
+  <h2 class="s-title">Requisitos para ser<br><em>aliada Kiwilu.</em></h2>
+  <p class="s-sub">Lo hacemos sencillo — si ya ejerces como nutrióloga en Saltillo, prácticamente ya cumples.</p>
+  <div class="req-grid">
+    <div class="rcard">
+      <div class="rcard-num">01</div>
+      <div class="rcard-title">Título profesional en Nutrición</div>
+      <div class="rcard-desc">Licenciatura en Nutrición o carrera afín con cédula profesional vigente. Validamos tu perfil antes de activarte.</div>
+      <div class="rcard-status rs-yes">Requerido</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-num">02</div>
+      <div class="rcard-title">Consulta activa en Saltillo</div>
+      <div class="rcard-desc">Atiendes pacientes de forma regular en Saltillo o zona metropolitana. Puede ser consultorio propio o en clínica.</div>
+      <div class="rcard-status rs-yes">Requerido</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-num">03</div>
+      <div class="rcard-title">Disponibilidad para enviar planes</div>
+      <div class="rcard-desc">Compromiso de enviar el plan semana a semana los lunes antes de las 9 am. Un mensaje por WhatsApp es suficiente.</div>
+      <div class="rcard-status rs-yes">Requerido</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-num">04</div>
+      <div class="rcard-title">Experiencia mínima</div>
+      <div class="rcard-desc">Preferimos nutriólogas con al menos 1 año de práctica activa. Si eres recién egresada con pacientes activos, también podemos hablar.</div>
+      <div class="rcard-status rs-no">Deseable, no excluyente</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-num">05</div>
+      <div class="rcard-title">Inversión económica</div>
+      <div class="rcard-desc">No hay costo para unirte como aliada. Kiwilu cobra directamente al paciente. Tú no inviertes dinero — inviertes el plan.</div>
+      <div class="rcard-status rs-no">No se requiere</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-num">06</div>
+      <div class="rcard-title">Plataformas digitales</div>
+      <div class="rcard-desc">No necesitas aprender software nuevo. La coordinación es por WhatsApp o correo, igual que cualquier comunicación profesional.</div>
+      <div class="rcard-status rs-no">No se requiere</div>
+    </div>
+  </div>
+  <div class="req-note">
+    <div class="req-note-icon">💬</div>
+    <div class="req-note-text">
+      <strong>¿Tienes dudas sobre si calificas?</strong> Escríbenos directamente. Revisamos cada perfil de forma personalizada y te respondemos en 24 horas. Nuestro objetivo es sumar nutriólogas que compartan el compromiso de que sus pacientes cumplan — no filtrar por tecnicismos.
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq" id="faq">
+  <div class="faq-layout">
+    <div class="faq-intro">
+      <div class="s-eyebrow">Resolvemos tus dudas</div>
+      <h2 class="s-title">Preguntas<br><em>frecuentes.</em></h2>
+      <p class="faq-intro-desc">Las preguntas que nos hacen las nutriólogas antes de unirse. Si la tuya no está aquí, escríbenos.</p>
+      <a href="registro.html" class="faq-cta">Registrarme como aliada →</a>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿En qué formato tengo que enviar el plan?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">El que ya usas. Un PDF de tu software de nutrición, una foto del plan escrito, un documento de Word o un mensaje detallado por WhatsApp. Nos adaptamos a tu flujo de trabajo, no al revés.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Puedo tener varios pacientes activos al mismo tiempo?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Sí, y es lo esperado. Cada paciente tuyo tiene su propio plan en cocina. Solo envías un plan por paciente activo antes del lunes. Sin límite de pacientes simultáneos.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué pasa si el paciente quiere un ajuste a mitad de semana?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Los ajustes menores — por intolerancia o preferencia que no cambia los macros — los manejamos directamente. Cambios significativos al plan se coordinan para la siguiente semana, como haría cualquier proceso de preparación de alimentos.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Puedo recomendar Kiwilu a pacientes que no son míos?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Kiwilu solo cocina planes de nutriólogas aliadas. Si un paciente llega sin nutrióloga, lo orientamos para conectarlo con aliadas disponibles — lo que puede generar nuevos pacientes para ti.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Hay exclusividad de zona o especialidad?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">No. Trabajamos con todas las especialidades — pérdida de peso, deportiva, clínica, patologías específicas. No hay cuotas por zona geográfica dentro de Saltillo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Cómo se enteran mis pacientes de que existe Kiwilu?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Tú los mencionas en consulta. Te damos un brief explicativo para tus pacientes y material de apoyo digital. La presentación la haces tú — es parte de tu propuesta de valor como aliada.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Cuánto cobra Kiwilu a mis pacientes?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Los precios dependen del plan diseñado (número de tiempos, ingredientes, semanas contratadas). Al registrarte como aliada te compartimos la estructura de precios para que puedas orientar a tus pacientes con claridad.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALES ── -->
+<section class="testi">
+  <div style="max-width:520px;margin:0 auto 52px;text-align:center">
+    <div style="font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-weight:600;margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:10px">
+      <span style="flex:1;max-width:32px;height:1px;background:var(--gold);display:inline-block;opacity:.5"></span>
+      Lo que dicen nuestras aliadas
+      <span style="flex:1;max-width:32px;height:1px;background:var(--gold);display:inline-block;opacity:.5"></span>
+    </div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:#fff;line-height:1.1">Nutriólogas que<br>ya son <em style="color:var(--em)">aliadas Kiwilu.</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-quote">"El cambio fue inmediato. En la siguiente consulta de seguimiento, mis pacientes llegaron habiendo cumplido el 100% del plan. No el 60% de siempre."</div>
+      <div class="tcard-divider"></div>
+      <div class="tcard-name">Lic. Ana Torres</div>
+      <div class="tcard-role">Nutrición clínica · Saltillo · 6 años de práctica</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-quote">"Lo que más me convence es que mi criterio clínico no se compromete. Kiwilu cocina exactamente lo que yo diseñé. No adaptan, no sustituyen sin avisar."</div>
+      <div class="tcard-divider"></div>
+      <div class="tcard-name">Lic. Fernanda Cavazos</div>
+      <div class="tcard-role">Nutrición deportiva · Saltillo</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-quote">"Lo recomiendo a todas mis colegas. Mis pacientes con objetivos de composición corporal logran sus metas más rápido — y eso se traduce en más recomendaciones para mi consulta."</div>
+      <div class="tcard-divider"></div>
+      <div class="tcard-name">Lic. Mariana Reyes</div>
+      <div class="tcard-role">Nutrición y composición corporal · Saltillo · 8 años</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA FINAL ── -->
+<section class="cta-final">
+  <div class="s-eyebrow">Empieza esta semana</div>
+  <h2 class="cta-title">Tu práctica.<br>Sus <em>resultados.</em></h2>
+  <p class="cta-sub">Únete como nutrióloga aliada Kiwilu. Sin inversión, sin cambiar cómo trabajas. Solo el puente que faltaba entre tu plan y el plato de tu paciente.</p>
+  <div class="cta-actions">
+    <a href="registro.html" class="btn-primary">Registrarme como aliada →</a>
+    <a href="index.html" class="btn-outline">Volver al inicio</a>
+  </div>
+  <p class="cta-guarantee">Sin costos de registro · Sin contratos de permanencia · Saltillo, Coah.</p>
+</section>
+
+<!-- ── STRIP ── -->
+<div class="strip">
+  <div class="strip-left">kiwilu<span>.co</span></div>
+  <div class="strip-links">
+    <a href="index.html">Inicio</a>
+    <a href="paciente.html">Para pacientes</a>
+    <a href="registro.html">Registro de aliadas</a>
+    <a href="#">Escápate Café</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="flogo">Kiwi<span>lu</span></div>
+  <div class="flinks">
+    <a href="#">Términos y condiciones</a>
+    <a href="#">Aviso de privacidad</a>
+    <a href="#">Contacto</a>
+  </div>
+  <div class="ftxt">Saltillo, Coahuila · 2026 · Ecosistema Nutrilú</div>
+</footer>
+
+<script>
+function toggleFaq(el){
+  const answer = el.nextElementSibling;
+  const icon = el.querySelector('.faq-icon');
+  const isOpen = answer.classList.contains('open');
+  // close all
+  document.querySelectorAll('.faq-a').forEach(a=>a.classList.remove('open'));
+  document.querySelectorAll('.faq-icon').forEach(i=>i.classList.remove('open'));
+  // open if was closed
+  if(!isOpen){
+    answer.classList.add('open');
+    icon.classList.add('open');
+  }
+}
+</script>
+
+</body>
+</html>
