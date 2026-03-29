@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi portal · Kiwilu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --e:#0F7A5A;--ed:#084D38;--el:#E6F5F0;--em:#3DAB84;
+  --gold:#C4973A;--goldd:#9B7128;--goldl:#FBF4E6;
+  --off:#F8F7F3;--dark:#141412;--mid:#5E5D59;--light:#B0AFA8;
+  --border:rgba(0,0,0,.07);--white:#fff;--cream:#F2F0EB;
+  --ok:#15803D;--okl:#DCFCE7;
+  --warn:#C47A00;--warnl:#FFFBEA;
+  --danger:#E24B4A;--dangerl:#FCEBEB;
+}
+body{font-family:'Outfit',sans-serif;background:var(--off);color:var(--dark);min-height:100vh;display:grid;grid-template-columns:252px 1fr}
+
+/* ── SIDEBAR ── */
+.sidebar{background:var(--ed);display:flex;flex-direction:column;padding:24px 14px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sb-logo{font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;font-weight:600;letter-spacing:-.01em;margin-bottom:2px}
+.sb-logo em{font-style:italic;color:var(--gold)}
+.sb-role{font-size:10px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.12em;font-weight:600;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-sect{font-size:10px;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.1em;font-weight:700;padding:12px 10px 5px}
+.sbtn{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;font-size:13px;color:rgba(255,255,255,.45);cursor:pointer;border:none;background:transparent;width:100%;font-family:'Outfit',sans-serif;font-weight:500;transition:.14s;text-align:left}
+.sbtn:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
+.sbtn.active{background:rgba(61,171,132,.25);color:#fff;border:1px solid rgba(61,171,132,.3)}
+.sbtn svg{width:14px;height:14px;flex-shrink:0;opacity:.5}
+.sbtn.active svg{opacity:1}
+.sb-div{height:1px;background:rgba(255,255,255,.07);margin:4px 0}
+.sb-sp{flex:1}
+.sb-recogida{background:rgba(255,255,255,.06);border-radius:10px;padding:14px;margin-top:8px}
+.sr-label{font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:5px}
+.sr-val{font-size:13px;color:rgba(255,255,255,.7);line-height:1.55}
+.sr-time{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);font-style:italic}
+.sb-profile{margin-top:10px;padding:12px;background:rgba(255,255,255,.05);border-radius:10px;display:flex;align-items:center;gap:10px}
+.sp-av{width:32px;height:32px;border-radius:50%;background:var(--el);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ed);flex-shrink:0}
+.sp-name{font-size:12px;font-weight:600;color:#fff}
+.sp-sub{font-size:10px;color:rgba(255,255,255,.28);margin-top:2px}
+
+/* ── MAIN ── */
+.main{overflow-y:auto}
+.view{display:none;padding:28px 32px}
+.view.active{display:block}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;gap:12px;flex-wrap:wrap}
+.pt{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--dark);line-height:1.1;font-weight:600}
+.pt em{color:var(--e);font-style:italic}
+.ps{font-size:13px;color:var(--mid);margin-top:4px;font-weight:300}
+
+/* ── HEADER ── */
+.main-header{display:flex;justify-content:space-between;align-items:center;padding:16px 32px 0;position:sticky;top:0;z-index:50;background:var(--off)}
+.mh-left{font-size:12px;color:var(--light)}
+.mh-right{display:flex;gap:10px;align-items:center}
+.mh-badge{display:inline-flex;align-items:center;gap:6px;background:var(--el);color:var(--e);font-size:11px;font-weight:600;padding:5px 14px;border-radius:100px}
+.mh-dot{width:6px;height:6px;border-radius:50%;background:var(--em)}
+
+/* ── BOTONES ── */
+.btn-primary{background:var(--e);color:#fff;border:none;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif}
+.btn-gold{background:var(--gold);color:#fff;border:none;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif}
+.btn-sm{font-size:12px;padding:6px 16px;border-radius:100px;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--mid);font-family:'Outfit',sans-serif;font-weight:600}
+.btn-sm:hover{border-color:var(--e);color:var(--e)}
+.btn-green-sm{font-size:12px;padding:6px 16px;border-radius:100px;cursor:pointer;border:none;background:var(--e);color:#fff;font-family:'Outfit',sans-serif;font-weight:600}
+
+/* ── PILLS ── */
+.pill{display:inline-block;font-size:11px;padding:2px 10px;border-radius:100px;font-weight:600}
+.pill-ok{background:var(--okl);color:var(--ok)}
+.pill-warn{background:var(--warnl);color:var(--warn)}
+.pill-danger{background:var(--dangerl);color:var(--danger)}
+.pill-green{background:var(--el);color:var(--ed)}
+.pill-gold{background:var(--goldl);color:var(--goldd)}
+.pill-off{background:var(--cream);color:var(--light)}
+
+/* ── CARDS ── */
+.card{background:var(--white);border-radius:16px;border:1px solid var(--border);margin-bottom:18px}
+.card-h{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border)}
+.card-t{font-size:14px;font-weight:600;color:var(--dark)}
+.inner{padding:18px 20px}
+
+/* ── PLAN SEMANA ── */
+.plan-header{background:var(--ed);border-radius:16px;padding:22px 26px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.ph-left{}
+.ph-semana{font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:6px}
+.ph-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;font-weight:600}
+.ph-nutri{font-size:12.5px;color:rgba(255,255,255,.5);margin-top:4px}
+.ph-nutri strong{color:var(--gold)}
+.ph-right{}
+.ph-adh-label{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:4px;text-align:right}
+.ph-adh-val{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);font-style:italic;text-align:right;line-height:1}
+.ph-adh-sub{font-size:11px;color:rgba(255,255,255,.3);text-align:right}
+
+.dias-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px}
+.dia-card{background:var(--white);border-radius:14px;border:1px solid var(--border);overflow:hidden;transition:.15s}
+.dia-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.08);border-color:rgba(15,122,90,.2)}
+.dia-card.recogido{border-color:rgba(15,122,90,.25)}
+.dia-head{padding:10px 12px;background:var(--cream);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.dia-nombre{font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em}
+.dia-body{padding:14px 12px}
+.dia-emoji{font-size:28px;margin-bottom:8px}
+.dia-platillo{font-size:13px;font-weight:600;color:var(--dark);line-height:1.35;margin-bottom:8px}
+.dia-macros{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px}
+.dia-macro{text-align:center;background:var(--off);border-radius:6px;padding:4px}
+.dia-macro-v{font-size:12px;font-weight:700;color:var(--dark)}
+.dia-macro-l{font-size:9px;color:var(--light);font-weight:600;text-transform:uppercase}
+.dia-nutri{font-size:10.5px;color:var(--light);display:flex;align-items:center;gap:5px}
+.dia-nutri-dot{width:5px;height:5px;border-radius:50%;background:var(--em)}
+.dia-status{font-size:10px;font-weight:600;padding:3px 8px;border-radius:100px}
+.ds-recogido{background:var(--okl);color:var(--ok)}
+.ds-hoy{background:var(--goldl);color:var(--goldd)}
+.ds-pendiente{background:var(--cream);color:var(--light)}
+
+/* ── SUBIR PLAN ── */
+.upload-steps{display:flex;flex-direction:column;gap:0;margin-bottom:24px}
+.ustep{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--border)}
+.ustep:last-child{border-bottom:none}
+.ustep-num{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--el);font-style:italic;font-weight:600;min-width:36px;line-height:1}
+.ustep-body{}
+.ustep-title{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:5px}
+.ustep-desc{font-size:13.5px;color:var(--mid);line-height:1.65}
+.ustep-tag{display:inline-block;margin-top:8px;font-size:11px;font-weight:600;color:var(--e);background:var(--el);padding:3px 10px;border-radius:100px}
+
+.formatos-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.formato-pill{display:flex;align-items:center;gap:7px;padding:8px 16px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);font-size:12.5px;font-weight:600;color:var(--mid)}
+.formato-icon{font-size:15px}
+
+.upload-zone{border:2px dashed rgba(15,122,90,.25);border-radius:14px;padding:40px;text-align:center;cursor:pointer;background:var(--el);transition:.2s;margin-bottom:16px}
+.upload-zone:hover{border-color:var(--e);background:rgba(15,122,90,.08)}
+.uz-icon{font-size:36px;margin-bottom:12px}
+.uz-title{font-size:15px;font-weight:600;color:var(--ed);margin-bottom:6px}
+.uz-sub{font-size:13px;color:var(--mid)}
+
+.disclaimer{background:var(--goldl);border:1px solid rgba(196,151,58,.25);border-radius:12px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}
+.disc-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.disc-title{font-size:13px;font-weight:700;color:var(--goldd);margin-bottom:4px}
+.disc-text{font-size:12.5px;color:var(--mid);line-height:1.65}
+
+/* ── SIN PLAN ── */
+.rutas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.ruta-card{border-radius:16px;padding:28px 22px;border:1px solid var(--border);position:relative;overflow:hidden}
+.ruta-card.ruta-a{background:var(--ed)}
+.ruta-card.ruta-b{background:var(--white)}
+.ruta-card.ruta-c{background:var(--goldl);border-color:rgba(196,151,58,.2)}
+.ruta-num{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;letter-spacing:.05em;margin-bottom:14px}
+.ruta-a .ruta-num{color:rgba(255,255,255,.4)}
+.ruta-b .ruta-num{color:var(--light)}
+.ruta-c .ruta-num{color:var(--gold)}
+.ruta-icon{font-size:32px;margin-bottom:14px}
+.ruta-title{font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.3}
+.ruta-a .ruta-title{color:#fff}
+.ruta-b .ruta-title{color:var(--dark)}
+.ruta-c .ruta-title{color:var(--goldd)}
+.ruta-desc{font-size:13px;line-height:1.65;margin-bottom:20px}
+.ruta-a .ruta-desc{color:rgba(255,255,255,.55)}
+.ruta-b .ruta-desc{color:var(--mid)}
+.ruta-c .ruta-desc{color:var(--mid)}
+.ruta-btn{display:inline-block;padding:10px 20px;border-radius:100px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:'Outfit',sans-serif}
+.ruta-a .ruta-btn{background:var(--gold);color:#fff}
+.ruta-b .ruta-btn{background:var(--e);color:#fff}
+.ruta-c .ruta-btn{background:var(--gold);color:#fff}
+
+/* ── HISTORIAL ── */
+.hist-semana{background:var(--white);border-radius:14px;border:1px solid var(--border);padding:18px 20px;margin-bottom:12px}
+.hs-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.hs-semana{font-size:14px;font-weight:600;color:var(--dark)}
+.hs-adh{font-size:13px;font-weight:700;color:var(--e)}
+.hs-dias{display:flex;gap:6px}
+.hs-dia{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.hs-dia.ok{background:var(--el);color:var(--ed)}
+.hs-dia.no{background:var(--dangerl);color:var(--danger)}
+.hs-nutri{font-size:12px;color:var(--light);margin-top:8px}
+
+/* ── RECOGIDA ── */
+.recogida-hero{background:var(--ed);border-radius:16px;padding:28px 32px;margin-bottom:20px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.rh-left{}
+.rh-tag{font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:8px}
+.rh-title{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:600;margin-bottom:6px}
+.rh-addr{font-size:14px;color:rgba(255,255,255,.55)}
+.rh-right{text-align:right}
+.rh-hora-label{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.rh-hora{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--gold);font-style:italic;line-height:1}
+.rh-hora-sub{font-size:12px;color:rgba(255,255,255,.35)}
+
+.info-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.info-card{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:20px}
+.ic-icon{font-size:24px;margin-bottom:10px}
+.ic-title{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:5px}
+.ic-desc{font-size:13px;color:var(--mid);line-height:1.6}
+
+/* ── PAGOS ── */
+.plan-activo{background:var(--el);border:1px solid rgba(15,122,90,.2);border-radius:14px;padding:22px 26px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.pa-left{}
+.pa-label{font-size:11px;color:var(--e);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:6px}
+.pa-plan{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ed);font-weight:600}
+.pa-sub{font-size:13px;color:var(--mid);margin-top:4px}
+.pa-right{text-align:right}
+.pa-precio-label{font-size:11px;color:var(--mid);margin-bottom:4px}
+.pa-precio{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--ed);font-style:italic}
+.pa-precio-per{font-size:12px;color:var(--mid)}
+.hist-pagos{display:flex;flex-direction:column;gap:0}
+.pago-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}
+.pago-row:last-child{border-bottom:none;font-weight:700}
+.pago-concepto{color:var(--mid)}
+.pago-monto{font-weight:600;color:var(--dark)}
+
+/* ── PERFIL ── */
+.perfil-grid{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:start}
+.pcard{background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;position:sticky;top:20px}
+.pcard-top{background:var(--ed);padding:24px;text-align:center}
+.pav{width:64px;height:64px;border-radius:50%;background:var(--el);border:3px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ed);margin:0 auto 12px;font-weight:600}
+.pname{font-size:17px;font-weight:700;color:#fff;font-family:'Cormorant Garamond',serif}
+.psub{font-size:11px;color:rgba(255,255,255,.45);margin-top:4px}
+.pcard-body{padding:16px}
+.prow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.prow:last-child{border-bottom:none}
+.plbl{color:var(--mid);font-weight:300}
+.pval{font-weight:600;color:var(--dark)}
+.pform-sec{background:var(--white);border-radius:14px;padding:20px;border:1px solid var(--border);margin-bottom:14px}
+.pform-t{font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);color:var(--dark)}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+label{display:block;font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+input,select,textarea{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--dark);background:var(--off);outline:none;transition:.15s}
+input:focus,select:focus{border-color:var(--e);background:var(--white)}
+.fsave{background:var(--e);color:#fff;border:none;padding:10px 26px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif}
+
+/* ── MODAL ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:20px;width:100%;max-width:500px;max-height:92vh;overflow-y:auto}
+.modal-head{padding:20px 22px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--dark);font-weight:600}
+.modal-close{width:28px;height:28px;border-radius:50%;background:var(--cream);border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--mid)}
+.modal-body{padding:22px}
+.modal-foot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+.mbtn-ghost{padding:9px 20px;border-radius:100px;border:1.5px solid var(--border);background:transparent;font-size:13px;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:600;color:var(--mid)}
+.mbtn-prim{padding:9px 22px;border-radius:100px;background:var(--e);border:none;font-size:13px;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:600;color:#fff}
+
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;padding:12px 24px;border-radius:100px;font-size:13px;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap;font-weight:500}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="sidebar">
+  <div class="sb-logo">Kiwi<em>lu</em></div>
+  <div class="sb-role">Portal · Paciente</div>
+
+  <div class="sb-sect">Mi plan</div>
+  <button class="sbtn active" onclick="showV('plan',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1" y="2" width="14" height="12" rx="2"/><path d="M4 6h8M4 9h5" stroke-linecap="round"/></svg>
+    Plan de esta semana
+  </button>
+  <button class="sbtn" onclick="showV('historial',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5" stroke-linecap="round"/></svg>
+    Historial
+  </button>
+  <div class="sb-div"></div>
+
+  <div class="sb-sect">Plan nutricional</div>
+  <button class="sbtn" onclick="showV('subir',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 11V3M5 6l3-3 3 3" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 13h12" stroke-linecap="round"/></svg>
+    Subir mi plan
+  </button>
+  <button class="sbtn" onclick="showV('sin-plan',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v.5" stroke-linecap="round"/></svg>
+    No tengo plan
+  </button>
+  <div class="sb-div"></div>
+
+  <div class="sb-sect">Logística</div>
+  <button class="sbtn" onclick="showV('recogida',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 2C5.24 2 3 4.24 3 7c0 3.75 5 7 5 7s5-3.25 5-7c0-2.76-2.24-5-5-5z"/><circle cx="8" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>
+    Escápate Café
+  </button>
+  <div class="sb-div"></div>
+
+  <div class="sb-sect">Cuenta</div>
+  <button class="sbtn" onclick="showV('pagos',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1" y="4" width="14" height="9" rx="2"/><path d="M1 7h14" stroke-linecap="round"/></svg>
+    Pagos
+  </button>
+  <button class="sbtn" onclick="showV('perfil',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="5.5" r="2.5"/><path d="M2.5 13.5c0-3 2.5-4.5 5.5-4.5s5.5 1.5 5.5 4.5" stroke-linecap="round"/></svg>
+    Mi perfil
+  </button>
+
+  <div class="sb-sp"></div>
+  <div class="sb-recogida">
+    <div class="sr-label">Recogida hoy</div>
+    <div class="sr-time">4–9 PM</div>
+    <div class="sr-val">Escápate Café · Saltillo</div>
+  </div>
+  <div class="sb-profile">
+    <div class="sp-av">AS</div>
+    <div>
+      <div class="sp-name">Ana Sofía Vargas</div>
+      <div class="sp-sub">Plan activo · Semana 8</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<div class="main">
+  <div class="main-header">
+    <div class="mh-left">Kiwilu · Portal paciente</div>
+    <div class="mh-right">
+      <div class="mh-badge"><div class="mh-dot"></div>Plan activo</div>
+    </div>
+  </div>
+
+  <!-- ══════ PLAN SEMANA ══════ -->
+  <div class="view active" id="v-plan">
+    <div class="ph">
+      <div><div class="pt">Tu plan de <em>esta semana.</em></div><div class="ps">Lunes 31 mar – viernes 4 abr · 2026</div></div>
+      <button class="btn-sm" onclick="showV('historial',null)">Ver semanas anteriores</button>
+    </div>
+
+    <div class="plan-header">
+      <div class="ph-left">
+        <div class="ph-semana">Semana 8 de tu plan nutricional</div>
+        <div class="ph-title">Plan de pérdida de peso supervisado</div>
+        <div class="ph-nutri">Diseñado por <strong>Nut. Valeria Ríos</strong> · Cédula 3291045</div>
+      </div>
+      <div class="ph-right">
+        <div class="ph-adh-label">Adherencia</div>
+        <div class="ph-adh-val">80%</div>
+        <div class="ph-adh-sub">4 de 5 comidas recogidas</div>
+      </div>
+    </div>
+
+    <div class="dias-grid">
+      <div class="dia-card recogido">
+        <div class="dia-head">
+          <div class="dia-nombre">Lunes</div>
+          <span class="dia-status ds-recogido">✓ Recogido</span>
+        </div>
+        <div class="dia-body">
+          <div class="dia-emoji">🍋</div>
+          <div class="dia-platillo">Pollo al limón con quinoa y espinaca</div>
+          <div class="dia-macros">
+            <div class="dia-macro"><div class="dia-macro-v">34g</div><div class="dia-macro-l">Prot</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">42g</div><div class="dia-macro-l">Carbs</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">8g</div><div class="dia-macro-l">Grasas</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">380</div><div class="dia-macro-l">Kcal</div></div>
+          </div>
+          <div class="dia-nutri"><div class="dia-nutri-dot"></div>Nut. Valeria Ríos</div>
+        </div>
+      </div>
+
+      <div class="dia-card recogido">
+        <div class="dia-head">
+          <div class="dia-nombre">Martes</div>
+          <span class="dia-status ds-recogido">✓ Recogido</span>
+        </div>
+        <div class="dia-body">
+          <div class="dia-emoji">🫒</div>
+          <div class="dia-platillo">Bowl mediterráneo de garbanzo y pollo</div>
+          <div class="dia-macros">
+            <div class="dia-macro"><div class="dia-macro-v">30g</div><div class="dia-macro-l">Prot</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">48g</div><div class="dia-macro-l">Carbs</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">12g</div><div class="dia-macro-l">Grasas</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">410</div><div class="dia-macro-l">Kcal</div></div>
+          </div>
+          <div class="dia-nutri"><div class="dia-nutri-dot"></div>Nut. Valeria Ríos</div>
+        </div>
+      </div>
+
+      <div class="dia-card recogido">
+        <div class="dia-head">
+          <div class="dia-nombre">Miércoles</div>
+          <span class="dia-status ds-recogido">✓ Recogido</span>
+        </div>
+        <div class="dia-body">
+          <div class="dia-emoji">🐟</div>
+          <div class="dia-platillo">Salmón al horno con puré de coliflor</div>
+          <div class="dia-macros">
+            <div class="dia-macro"><div class="dia-macro-v">36g</div><div class="dia-macro-l">Prot</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">28g</div><div class="dia-macro-l">Carbs</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">18g</div><div class="dia-macro-l">Grasas</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">420</div><div class="dia-macro-l">Kcal</div></div>
+          </div>
+          <div class="dia-nutri"><div class="dia-nutri-dot"></div>Nut. Valeria Ríos</div>
+        </div>
+      </div>
+
+      <div class="dia-card">
+        <div class="dia-head">
+          <div class="dia-nombre">Jueves</div>
+          <span class="dia-status ds-pendiente">No recogido</span>
+        </div>
+        <div class="dia-body">
+          <div class="dia-emoji">🥗</div>
+          <div class="dia-platillo">Ensalada de lentejas con atún y aguacate</div>
+          <div class="dia-macros">
+            <div class="dia-macro"><div class="dia-macro-v">28g</div><div class="dia-macro-l">Prot</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">40g</div><div class="dia-macro-l">Carbs</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">14g</div><div class="dia-macro-l">Grasas</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">390</div><div class="dia-macro-l">Kcal</div></div>
+          </div>
+          <div class="dia-nutri"><div class="dia-nutri-dot"></div>Nut. Valeria Ríos</div>
+        </div>
+      </div>
+
+      <div class="dia-card">
+        <div class="dia-head">
+          <div class="dia-nombre">Viernes</div>
+          <span class="dia-status ds-hoy">Hoy</span>
+        </div>
+        <div class="dia-body">
+          <div class="dia-emoji">🍲</div>
+          <div class="dia-platillo">Bowl de res con quinoa y verduras al vapor</div>
+          <div class="dia-macros">
+            <div class="dia-macro"><div class="dia-macro-v">32g</div><div class="dia-macro-l">Prot</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">44g</div><div class="dia-macro-l">Carbs</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">10g</div><div class="dia-macro-l">Grasas</div></div>
+            <div class="dia-macro"><div class="dia-macro-v">400</div><div class="dia-macro-l">Kcal</div></div>
+          </div>
+          <div class="dia-nutri"><div class="dia-nutri-dot"></div>Nut. Valeria Ríos</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0">
+      <div class="card-h"><div class="card-t">Tu nutrióloga</div></div>
+      <div class="inner" style="display:flex;align-items:center;gap:16px">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--el);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ed);font-weight:600;flex-shrink:0">VR</div>
+        <div style="flex:1">
+          <div style="font-size:15px;font-weight:600;color:var(--dark)">Nut. Valeria Ríos</div>
+          <div style="font-size:12.5px;color:var(--mid);margin-top:2px">Nutrióloga clínica · Cédula 3291045 · Plan diseñado en consulta privada</div>
+        </div>
+        <span class="pill pill-green">Tu nutrióloga</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ HISTORIAL ══════ -->
+  <div class="view" id="v-historial">
+    <div class="ph"><div><div class="pt">Historial de <em>semanas.</em></div><div class="ps">Tus últimas 4 semanas de plan</div></div></div>
+
+    <div class="hist-semana">
+      <div class="hs-head">
+        <div><div class="hs-semana">Semana 8 · 31 mar – 4 abr</div><div style="font-size:12px;color:var(--mid);margin-top:2px">Plan de pérdida de peso · Nut. Valeria Ríos</div></div>
+        <div class="hs-adh">80%</div>
+      </div>
+      <div class="hs-dias">
+        <div class="hs-dia ok">L</div><div class="hs-dia ok">M</div><div class="hs-dia ok">X</div><div class="hs-dia no">J</div><div class="hs-dia ok">V</div>
+      </div>
+      <div class="hs-nutri">Diseñado por Nut. Valeria Ríos · Cédula 3291045</div>
+    </div>
+
+    <div class="hist-semana">
+      <div class="hs-head">
+        <div><div class="hs-semana">Semana 7 · 24 – 28 mar</div><div style="font-size:12px;color:var(--mid);margin-top:2px">Plan de pérdida de peso · Nut. Valeria Ríos</div></div>
+        <div class="hs-adh">100%</div>
+      </div>
+      <div class="hs-dias">
+        <div class="hs-dia ok">L</div><div class="hs-dia ok">M</div><div class="hs-dia ok">X</div><div class="hs-dia ok">J</div><div class="hs-dia ok">V</div>
+      </div>
+      <div class="hs-nutri">Diseñado por Nut. Valeria Ríos · Cédula 3291045</div>
+    </div>
+
+    <div class="hist-semana">
+      <div class="hs-head">
+        <div><div class="hs-semana">Semana 6 · 17 – 21 mar</div><div style="font-size:12px;color:var(--mid);margin-top:2px">Plan de pérdida de peso · Nut. Valeria Ríos</div></div>
+        <div class="hs-adh">80%</div>
+      </div>
+      <div class="hs-dias">
+        <div class="hs-dia ok">L</div><div class="hs-dia no">M</div><div class="hs-dia ok">X</div><div class="hs-dia ok">J</div><div class="hs-dia ok">V</div>
+      </div>
+      <div class="hs-nutri">Diseñado por Nut. Valeria Ríos · Cédula 3291045</div>
+    </div>
+
+    <div class="hist-semana">
+      <div class="hs-head">
+        <div><div class="hs-semana">Semana 5 · 10 – 14 mar</div><div style="font-size:12px;color:var(--mid);margin-top:2px">Plan de pérdida de peso · Nut. Valeria Ríos</div></div>
+        <div class="hs-adh">60%</div>
+      </div>
+      <div class="hs-dias">
+        <div class="hs-dia ok">L</div><div class="hs-dia ok">M</div><div class="hs-dia no">X</div><div class="hs-dia no">J</div><div class="hs-dia ok">V</div>
+      </div>
+      <div class="hs-nutri">Diseñado por Nut. Valeria Ríos · Cédula 3291045</div>
+    </div>
+  </div>
+
+  <!-- ══════ SUBIR PLAN ══════ -->
+  <div class="view" id="v-subir">
+    <div class="ph"><div><div class="pt">Subir mi <em>plan nutricional.</em></div><div class="ps">Comparte el plan que te indicó tu nutrióloga o médico</div></div></div>
+
+    <div class="card">
+      <div class="card-h"><div class="card-t">Formatos que aceptamos</div></div>
+      <div class="inner">
+        <div class="formatos-row">
+          <div class="formato-pill"><span class="formato-icon">📄</span>PDF o documento</div>
+          <div class="formato-pill"><span class="formato-icon">📷</span>Foto del plan</div>
+          <div class="formato-pill"><span class="formato-icon">💬</span>Mensaje de WhatsApp</div>
+          <div class="formato-pill"><span class="formato-icon">✍️</span>Escrito a mano</div>
+          <div class="formato-pill"><span class="formato-icon">📱</span>Captura de pantalla</div>
+        </div>
+        <div style="font-size:13px;color:var(--mid)">Cualquier formato legible que incluya alimentos, cantidades y tiempos de comida es válido.</div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <div class="disc-icon">⚠️</div>
+      <div>
+        <div class="disc-title">Aviso de responsabilidad</div>
+        <div class="disc-text">Al enviar el plan, confirmas que fue prescrito por un profesional de la salud certificado (nutrióloga, médico, endocrinólogo u otro especialista). Si el plan contiene información incorrecta o no proviene de un profesional, la responsabilidad recae únicamente en ti. Kiwilu cocina lo que se le indica — no verifica la autenticidad del plan.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="card-t">Sube tu plan</div></div>
+      <div class="inner">
+        <div class="upload-steps">
+          <div class="ustep">
+            <div class="ustep-num">01</div>
+            <div class="ustep-body">
+              <div class="ustep-title">Sube o comparte el plan</div>
+              <div class="ustep-desc">Arrastra el archivo aquí, o comparte el plan por WhatsApp al número de Kiwilu. Aceptamos cualquier formato legible.</div>
+              <span class="ustep-tag">Foto, PDF, WhatsApp, escrito</span>
+            </div>
+          </div>
+          <div class="ustep">
+            <div class="ustep-num">02</div>
+            <div class="ustep-body">
+              <div class="ustep-title">Confirmamos y cotizamos</div>
+              <div class="ustep-desc">Revisamos el plan y te enviamos la confirmación con el precio de la semana. Sin sorpresas.</div>
+              <span class="ustep-tag">En menos de 24 horas</span>
+            </div>
+          </div>
+          <div class="ustep">
+            <div class="ustep-num">03</div>
+            <div class="ustep-body">
+              <div class="ustep-title">Pagas y empieza la semana</div>
+              <div class="ustep-desc">Confirmas el pago y tu plan queda activo para la siguiente semana. Tu comida estará lista cada tarde.</div>
+              <span class="ustep-tag">Recogida 4–9 PM en Escápate Café</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="upload-zone" onclick="toast('Funcionalidad de carga — próximamente')">
+          <div class="uz-icon">📂</div>
+          <div class="uz-title">Arrastra tu plan aquí</div>
+          <div class="uz-sub">o toca para seleccionar un archivo · PDF, imagen, cualquier formato</div>
+        </div>
+
+        <div style="text-align:center;margin-bottom:16px">
+          <span style="font-size:13px;color:var(--light)">— o —</span>
+        </div>
+
+        <div style="background:var(--el);border-radius:12px;padding:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--ed)">Envíanos tu plan por WhatsApp</div>
+            <div style="font-size:13px;color:var(--mid);margin-top:3px">Al número de Kiwilu · Saltillo · Lunes a viernes</div>
+          </div>
+          <button class="btn-primary" onclick="toast('Abriendo WhatsApp...')">Abrir WhatsApp →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ SIN PLAN ══════ -->
+  <div class="view" id="v-sin-plan">
+    <div class="ph"><div><div class="pt">¿No tienes <em>plan todavía?</em></div><div class="ps">Elige la opción que mejor se adapte a tu situación</div></div></div>
+
+    <div class="rutas-grid">
+      <div class="ruta-card ruta-a">
+        <div class="ruta-num">Opción 01</div>
+        <div class="ruta-icon">🤝</div>
+        <div class="ruta-title">Agregar consulta al paquete</div>
+        <div class="ruta-desc">Agenda con una nutrióloga aliada de Kiwilu. Ella diseña tu plan en consulta y lo envía directamente. Todo en un solo proceso, desde la semana 1.</div>
+        <button class="ruta-btn" onclick="toast('Abriendo directorio de nutriólogas...')">Ver nutriólogas →</button>
+      </div>
+
+      <div class="ruta-card ruta-b">
+        <div class="ruta-num">Opción 02</div>
+        <div class="ruta-icon">📅</div>
+        <div class="ruta-title">Consultar primero, luego empezar</div>
+        <div class="ruta-desc">Agenda con cualquier nutrióloga del directorio, obtén tu plan y regresa con él. Sin compromisos anticipados — cuando tengas tu plan, arrancamos.</div>
+        <button class="ruta-btn" onclick="toast('Abriendo directorio...')">Ver directorio →</button>
+      </div>
+
+      <div class="ruta-card ruta-c">
+        <div class="ruta-num">Opción 03</div>
+        <div class="ruta-icon">🥗</div>
+        <div class="ruta-title">Solo quiero comer sano</div>
+        <div class="ruta-desc">Kiwilu cocina planes prescritos por profesionales. Si lo que buscas es comida saludable y balanceada sin una dieta personalizada, NutriPalm es exactamente eso.</div>
+        <button class="ruta-btn" onclick="toast('Abriendo NutriPalm...')">Conocer NutriPalm →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ RECOGIDA ══════ -->
+  <div class="view" id="v-recogida">
+    <div class="ph"><div><div class="pt">Recoge en <em>Escápate Café.</em></div><div class="ps">Tu comida lista cada tarde · Lunes a viernes</div></div></div>
+
+    <div class="recogida-hero">
+      <div class="rh-left">
+        <div class="rh-tag">Punto de recogida</div>
+        <div class="rh-title">Escápate Café</div>
+        <div class="rh-addr">Zona residencial C+ · Saltillo, Coahuila</div>
+      </div>
+      <div class="rh-right">
+        <div class="rh-hora-label">Ventana de recogida</div>
+        <div class="rh-hora">4–9</div>
+        <div class="rh-hora-sub">PM · Lunes a viernes</div>
+      </div>
+    </div>
+
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="ic-icon">🏷️</div>
+        <div class="ic-title">Contenedor etiquetado</div>
+        <div class="ic-desc">Tu nombre en la etiqueta con el platillo del día y los macros. Solo toma el tuyo y listo.</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon">📲</div>
+        <div class="ic-title">WhatsApp cuando está listo</div>
+        <div class="ic-desc">Recibes aviso en cuanto tu pedido está en Escápate Café. Sin esperar, sin preguntar.</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon">❄️</div>
+        <div class="ic-title">Refrigeración garantizada</div>
+        <div class="ic-desc">Tu comida permanece refrigerada hasta las 9 PM. Comida no recogida se descarta al cierre, sin devolución.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0">
+      <div class="card-h"><div class="card-t">Tu número de WhatsApp registrado</div><button class="btn-sm" onclick="openModal('modal-whatsapp')">Cambiar</button></div>
+      <div class="inner" style="display:flex;align-items:center;gap:14px">
+        <div style="font-size:28px">📱</div>
+        <div>
+          <div style="font-size:16px;font-weight:600;color:var(--dark)">844 123 4567</div>
+          <div style="font-size:13px;color:var(--mid);margin-top:2px">Recibirás el aviso aquí cuando tu comida esté lista</div>
+        </div>
+        <span class="pill pill-green" style="margin-left:auto">Verificado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ PAGOS ══════ -->
+  <div class="view" id="v-pagos">
+    <div class="ph"><div><div class="pt">Mis <em>pagos.</em></div></div></div>
+
+    <div class="plan-activo">
+      <div class="pa-left">
+        <div class="pa-label">Plan activo</div>
+        <div class="pa-plan">Suscripción semanal</div>
+        <div class="pa-sub">5 comidas por semana · Plan de pérdida de peso · Nut. Valeria Ríos</div>
+      </div>
+      <div class="pa-right">
+        <div class="pa-precio-label">Precio por semana</div>
+        <div class="pa-precio">$650</div>
+        <div class="pa-precio-per">MXN · pago anticipado cada miércoles</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="card-t">Historial de pagos</div></div>
+      <div class="inner">
+        <div class="hist-pagos">
+          <div class="pago-row">
+            <span class="pago-concepto">Semana 8 · 31 mar – 4 abr</span>
+            <span class="pago-monto">$650</span>
+          </div>
+          <div class="pago-row">
+            <span class="pago-concepto">Semana 7 · 24 – 28 mar</span>
+            <span class="pago-monto">$650</span>
+          </div>
+          <div class="pago-row">
+            <span class="pago-concepto">Semana 6 · 17 – 21 mar</span>
+            <span class="pago-monto">$650</span>
+          </div>
+          <div class="pago-row">
+            <span class="pago-concepto">Semana 5 · 10 – 14 mar</span>
+            <span class="pago-monto">$650</span>
+          </div>
+          <div class="pago-row">
+            <span class="pago-concepto">Total pagado (8 semanas)</span>
+            <span class="pago-monto" style="color:var(--e)">$5,200</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ PERFIL ══════ -->
+  <div class="view" id="v-perfil">
+    <div class="ph"><div><div class="pt">Mi <em>perfil.</em></div></div></div>
+    <div class="perfil-grid">
+      <div class="pcard">
+        <div class="pcard-top">
+          <div class="pav">AS</div>
+          <div class="pname">Ana Sofía Vargas</div>
+          <div class="psub">Paciente Kiwilu · Semana 8</div>
+        </div>
+        <div class="pcard-body">
+          <div class="prow"><span class="plbl">Plan activo</span><span class="pval">Pérdida de peso</span></div>
+          <div class="prow"><span class="plbl">Nutrióloga</span><span class="pval">Nut. Valeria Ríos</span></div>
+          <div class="prow"><span class="plbl">Adherencia</span><span class="pval">85% promedio</span></div>
+          <div class="prow"><span class="plbl">Semanas activas</span><span class="pval">8</span></div>
+          <div class="prow"><span class="plbl">Desde</span><span class="pval">Feb 2026</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="pform-sec">
+          <div class="pform-t">Datos personales</div>
+          <div class="frow2">
+            <div><label>Nombre</label><input type="text" value="Ana Sofía Vargas"></div>
+            <div><label>WhatsApp</label><input type="tel" value="844 123 4567"></div>
+          </div>
+          <div class="frow2">
+            <div><label>Correo</label><input type="email" value="anasofia@correo.com"></div>
+            <div><label>Colonia de recogida</label><input type="text" value="San Patricio, Saltillo"></div>
+          </div>
+          <div style="margin-top:4px"><button class="fsave" onclick="toast('Perfil actualizado ✓')">Guardar cambios</button></div>
+        </div>
+        <div class="pform-sec">
+          <div class="pform-t">Mi nutrióloga</div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px;background:var(--el);border-radius:12px">
+            <div style="width:44px;height:44px;border-radius:50%;background:var(--ed);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;color:#fff;font-weight:600;flex-shrink:0">VR</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:var(--dark)">Nut. Valeria Ríos</div>
+              <div style="font-size:12px;color:var(--mid);margin-top:2px">Cédula 3291045 · Plan prescrito en consulta privada</div>
+            </div>
+            <span class="pill pill-green" style="margin-left:auto">Activa</span>
+          </div>
+          <div style="font-size:12.5px;color:var(--light);margin-top:12px">¿Cambió tu nutrióloga? <a href="#" style="color:var(--e);text-decoration:none;font-weight:600">Actualizar plan →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL cambiar WhatsApp -->
+<div class="modal-bg" id="modal-whatsapp">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Cambiar WhatsApp</div>
+      <button class="modal-close" onclick="closeModal('modal-whatsapp')">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="margin-bottom:16px"><label>Nuevo número de WhatsApp</label><input type="tel" placeholder="844 000 0000"></div>
+      <div style="font-size:12.5px;color:var(--light)">Te enviaremos un código de verificación para confirmar el número.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="mbtn-ghost" onclick="closeModal('modal-whatsapp')">Cancelar</button>
+      <button class="mbtn-prim" onclick="closeModal('modal-whatsapp');toast('Código enviado por WhatsApp ✓')">Enviar código</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+function showV(id, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('v-' + id).classList.add('active');
+  if (btn) {
+    document.querySelectorAll('.sbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+}
+function openModal(id) { document.getElementById(id).classList.add('open') }
+function closeModal(id) { document.getElementById(id).classList.remove('open') }
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.opacity = 1;
+  setTimeout(() => t.style.opacity = 0, 2800);
+}
+</script>
+</body>
+</html>

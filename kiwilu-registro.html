@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro · Kiwilu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --e:#0F7A5A;--ed:#084D38;--el:#E6F5F0;--em:#3DAB84;
+  --gold:#C4973A;--goldd:#9B7128;--goldl:#FBF4E6;
+  --off:#F8F7F3;--dark:#141412;--mid:#5E5D59;--light:#B0AFA8;
+  --border:rgba(0,0,0,.07);--white:#fff;--cream:#F2F0EB;
+  --warn:#C47A00;--warnl:#FFFBEA;
+}
+body{font-family:'Outfit',sans-serif;background:var(--off);color:var(--dark);min-height:100vh;display:grid;grid-template-columns:420px 1fr}
+
+/* ══ PANEL IZQUIERDO ══ */
+.left{background:var(--ed);display:flex;flex-direction:column;padding:40px 44px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.left-logo{font-family:'Cormorant Garamond',serif;font-size:26px;color:#fff;font-weight:600;text-decoration:none;margin-bottom:48px;display:block}
+.left-logo em{font-style:italic;color:var(--gold)}
+
+.progress-wrap{margin-bottom:48px}
+.progress-label{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:14px}
+.progress-steps{display:flex;flex-direction:column;gap:0}
+.pstep{display:flex;align-items:flex-start;gap:14px;padding:12px 0;position:relative}
+.pstep:not(:last-child)::after{content:'';position:absolute;left:15px;top:40px;width:1px;height:calc(100% - 16px);background:rgba(255,255,255,.1)}
+.pstep-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;transition:.2s;position:relative;z-index:1}
+.pstep.done .pstep-num{background:var(--em);color:#fff}
+.pstep.active .pstep-num{background:var(--gold);color:#fff;box-shadow:0 0 0 4px rgba(196,151,58,.2)}
+.pstep.pending .pstep-num{background:rgba(255,255,255,.1);color:rgba(255,255,255,.3)}
+.pstep-body{}
+.pstep-title{font-size:14px;font-weight:600;transition:.2s}
+.pstep.done .pstep-title{color:rgba(255,255,255,.5)}
+.pstep.active .pstep-title{color:#fff}
+.pstep.pending .pstep-title{color:rgba(255,255,255,.25)}
+.pstep-sub{font-size:12px;margin-top:2px;transition:.2s}
+.pstep.done .pstep-sub{color:rgba(255,255,255,.3)}
+.pstep.active .pstep-sub{color:rgba(255,255,255,.55)}
+.pstep.pending .pstep-sub{color:rgba(255,255,255,.15)}
+
+.left-bottom{margin-top:auto}
+.left-quote{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:rgba(255,255,255,.6);line-height:1.5;margin-bottom:20px}
+.left-quote em{color:var(--gold);font-style:normal}
+.left-trust{display:flex;flex-direction:column;gap:8px}
+.lt-item{display:flex;align-items:center;gap:10px;font-size:12.5px;color:rgba(255,255,255,.4)}
+.lt-dot{width:6px;height:6px;border-radius:50%;background:var(--em);flex-shrink:0}
+
+/* ══ PANEL DERECHO ══ */
+.right{display:flex;flex-direction:column;min-height:100vh}
+.right-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 52px;border-bottom:1px solid var(--border);background:var(--off)}
+.rn-back{font-size:13.5px;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:6px}
+.rn-back:hover{color:var(--dark)}
+.rn-step{font-size:12px;color:var(--light)}
+
+.right-body{flex:1;padding:52px;max-width:560px}
+.step-eyebrow{font-size:11px;color:var(--e);text-transform:uppercase;letter-spacing:.13em;font-weight:600;margin-bottom:12px}
+.step-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--dark);line-height:1.1;margin-bottom:8px}
+.step-title em{color:var(--e);font-style:italic}
+.step-sub{font-size:15px;color:var(--mid);line-height:1.7;font-weight:300;margin-bottom:36px}
+
+/* ── CAMPOS ── */
+.field{margin-bottom:20px}
+.field label{display:block;font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.field input,.field select,.field textarea{width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:'Outfit',sans-serif;color:var(--dark);background:var(--white);outline:none;transition:.15s}
+.field input:focus,.field select:focus{border-color:var(--e);box-shadow:0 0 0 3px rgba(15,122,90,.08)}
+.field textarea{resize:vertical;min-height:90px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field-hint{font-size:12px;color:var(--light);margin-top:6px}
+
+/* ── OPCIONES SELECCIONABLES ── */
+.opciones{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.opcion{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:14px;border:1.5px solid var(--border);background:var(--white);cursor:pointer;transition:.15s;text-align:left;width:100%}
+.opcion:hover{border-color:rgba(15,122,90,.3);background:var(--el)}
+.opcion.selected{border-color:var(--e);background:var(--el);box-shadow:0 0 0 1px var(--e)}
+.opcion-icon{font-size:24px;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--off)}
+.opcion.selected .opcion-icon{background:var(--white)}
+.opcion-body{flex:1}
+.opcion-title{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:2px}
+.opcion-sub{font-size:13px;color:var(--mid);font-weight:300}
+.opcion-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s}
+.opcion.selected .opcion-check{background:var(--e);border-color:var(--e)}
+.opcion-check-inner{width:8px;height:8px;border-radius:50%;background:#fff;opacity:0;transition:.15s}
+.opcion.selected .opcion-check-inner{opacity:1}
+
+/* ── FORMATOS ── */
+.formatos{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.formato{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);font-size:13px;font-weight:500;color:var(--mid);cursor:pointer;transition:.15s}
+.formato:hover{border-color:rgba(15,122,90,.3);color:var(--e)}
+.formato.sel{border-color:var(--e);background:var(--el);color:var(--ed)}
+.formato-emoji{font-size:15px}
+
+/* ── UPLOAD ── */
+.upload-zone{border:2px dashed rgba(15,122,90,.25);border-radius:16px;padding:40px;text-align:center;cursor:pointer;background:var(--el);transition:.2s;margin-bottom:16px}
+.upload-zone:hover{border-color:var(--e);background:rgba(15,122,90,.08)}
+.uz-emoji{font-size:40px;margin-bottom:12px}
+.uz-title{font-size:16px;font-weight:600;color:var(--ed);margin-bottom:5px}
+.uz-sub{font-size:13px;color:var(--mid)}
+.wa-alt{background:var(--goldl);border:1px solid rgba(196,151,58,.2);border-radius:12px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.wa-alt-text{font-size:14px;font-weight:500;color:var(--goldd)}
+.wa-alt-sub{font-size:12px;color:var(--mid);margin-top:3px}
+
+/* ── DISCLAIMER ── */
+.disclaimer{background:var(--warnl);border:1px solid rgba(196,151,58,.25);border-radius:12px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;margin-bottom:24px}
+.disc-icon{font-size:18px;flex-shrink:0;margin-top:2px}
+.disc-title{font-size:13px;font-weight:700;color:var(--warn);margin-bottom:4px}
+.disc-text{font-size:12.5px;color:var(--mid);line-height:1.65}
+.disc-check{display:flex;align-items:flex-start;gap:10px;margin-top:14px;cursor:pointer}
+.disc-check input{width:18px;height:18px;border-radius:4px;accent-color:var(--e);flex-shrink:0;margin-top:1px;cursor:pointer}
+.disc-check-label{font-size:13px;color:var(--mid);line-height:1.5}
+
+/* ── RESUMEN ── */
+.resumen-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px}
+.rc-header{background:var(--ed);padding:20px 24px;display:flex;justify-content:space-between;align-items:center}
+.rc-h-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-weight:600}
+.rc-h-badge{font-size:11px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:4px 12px;border-radius:100px;font-weight:600}
+.rc-body{padding:0}
+.rc-row{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;border-bottom:1px solid var(--border);font-size:14px}
+.rc-row:last-child{border-bottom:none}
+.rc-label{color:var(--mid);font-weight:300}
+.rc-val{font-weight:600;color:var(--dark)}
+.rc-val.edit{color:var(--e);cursor:pointer;font-weight:500;font-size:13px}
+.precio-card{background:var(--el);border:1px solid rgba(15,122,90,.2);border-radius:14px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.pc-left{}
+.pc-label{font-size:11px;color:var(--e);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:4px}
+.pc-plan{font-size:15px;font-weight:600;color:var(--ed)}
+.pc-sub{font-size:12px;color:var(--mid);margin-top:3px}
+.pc-right{text-align:right}
+.pc-precio{font-family:'Cormorant Garamond',serif;font-size:40px;color:var(--ed);font-style:italic;line-height:1}
+.pc-per{font-size:12px;color:var(--mid)}
+
+/* ── ÉXITO ── */
+.success-wrap{text-align:center;padding:60px 20px}
+.success-icon{font-size:64px;margin-bottom:24px}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:var(--dark);margin-bottom:12px;line-height:1.1}
+.success-title em{color:var(--e);font-style:italic}
+.success-sub{font-size:16px;color:var(--mid);line-height:1.75;font-weight:300;max-width:440px;margin:0 auto 36px}
+.success-steps{display:flex;flex-direction:column;gap:12px;max-width:400px;margin:0 auto 40px;text-align:left}
+.ss-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--white);border-radius:12px;border:1px solid var(--border)}
+.ss-num{width:28px;height:28px;border-radius:50%;background:var(--e);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.ss-body{}
+.ss-title{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:3px}
+.ss-sub{font-size:12.5px;color:var(--mid)}
+
+/* ── BOTONES ── */
+.btn-primary{background:var(--e);color:#fff;border:none;padding:15px 36px;border-radius:100px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;width:100%;transition:.15s}
+.btn-primary:hover{background:var(--ed)}
+.btn-gold{background:var(--gold);color:#fff;border:none;padding:11px 24px;border-radius:100px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif}
+.btn-ghost{background:transparent;color:var(--mid);border:1.5px solid var(--border);padding:15px 28px;border-radius:100px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;width:100%;margin-top:10px;transition:.15s}
+.btn-ghost:hover{border-color:var(--e);color:var(--e)}
+.btn-wa{background:#25D366;color:#fff;border:none;padding:11px 24px;border-radius:100px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif}
+.btns{display:flex;flex-direction:column;gap:0}
+
+/* ── STEP OCULTO ── */
+.step{display:none}
+.step.active{display:block}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.step.active{animation:fadeIn .3s ease both}
+</style>
+</head>
+<body>
+
+<!-- ══ PANEL IZQUIERDO ══ -->
+<div class="left">
+  <a href="kiwilu-paciente.html" class="left-logo">Kiwi<em>lu</em></a>
+
+  <div class="progress-wrap">
+    <div class="progress-label">Tu proceso de registro</div>
+    <div class="progress-steps" id="progress-steps">
+      <div class="pstep active" data-step="1">
+        <div class="pstep-num">1</div>
+        <div class="pstep-body">
+          <div class="pstep-title">Datos personales</div>
+          <div class="pstep-sub">Nombre, contacto y WhatsApp</div>
+        </div>
+      </div>
+      <div class="pstep pending" data-step="2">
+        <div class="pstep-num">2</div>
+        <div class="pstep-body">
+          <div class="pstep-title">Tu plan nutricional</div>
+          <div class="pstep-sub">¿Tienes plan o necesitas uno?</div>
+        </div>
+      </div>
+      <div class="pstep pending" data-step="3">
+        <div class="pstep-num">3</div>
+        <div class="pstep-body">
+          <div class="pstep-title">Subir el plan</div>
+          <div class="pstep-sub">Cualquier formato es válido</div>
+        </div>
+      </div>
+      <div class="pstep pending" data-step="4">
+        <div class="pstep-num">4</div>
+        <div class="pstep-body">
+          <div class="pstep-title">Confirmación y pago</div>
+          <div class="pstep-sub">Revisamos y cotizamos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="left-bottom">
+    <div class="left-quote">"La dieta que ya te indicaron, <em>lista para comer.</em>"</div>
+    <div class="left-trust">
+      <div class="lt-item"><div class="lt-dot"></div>Cualquier plan de cualquier profesional</div>
+      <div class="lt-item"><div class="lt-dot"></div>Sin sustituciones no autorizadas</div>
+      <div class="lt-item"><div class="lt-dot"></div>Recogida 4–9 PM en Escápate Café</div>
+      <div class="lt-item"><div class="lt-dot"></div>Aviso por WhatsApp cuando está listo</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PANEL DERECHO ══ -->
+<div class="right">
+  <div class="right-nav">
+    <a href="kiwilu-paciente.html" class="rn-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg>
+      Volver a Kiwilu
+    </a>
+    <div class="rn-step" id="rn-step">Paso 1 de 4</div>
+  </div>
+
+  <div class="right-body">
+
+    <!-- ══ PASO 1: Datos personales ══ -->
+    <div class="step active" id="step-1">
+      <div class="step-eyebrow">Paso 1 de 4</div>
+      <h1 class="step-title">Cuéntanos <em>quién eres.</em></h1>
+      <p class="step-sub">Solo necesitamos lo básico para crear tu cuenta y avisarte por WhatsApp cuando tu comida esté lista.</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre" id="f-nombre">
+        </div>
+        <div class="field">
+          <label>Apellido</label>
+          <input type="text" placeholder="Tu apellido" id="f-apellido">
+        </div>
+      </div>
+      <div class="field">
+        <label>WhatsApp</label>
+        <input type="tel" placeholder="844 000 0000" id="f-whatsapp">
+        <div class="field-hint">Te avisamos aquí cuando tu comida esté lista para recoger.</div>
+      </div>
+      <div class="field">
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="tu@correo.com" id="f-email">
+        <div class="field-hint">Para tu confirmación y acceso al portal.</div>
+      </div>
+      <div class="field">
+        <label>Colonia en Saltillo</label>
+        <input type="text" placeholder="Ej. San Patricio, Valle Oriente..." id="f-colonia">
+        <div class="field-hint">Solo para saber si estás cerca de Escápate Café.</div>
+      </div>
+
+      <div class="btns">
+        <button class="btn-primary" onclick="goStep(2)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- ══ PASO 2: Plan nutricional ══ -->
+    <div class="step" id="step-2">
+      <div class="step-eyebrow">Paso 2 de 4</div>
+      <h1 class="step-title">¿Tienes tu <em>plan?</em></h1>
+      <p class="step-sub">Kiwilu cocina exactamente lo que tu profesional de salud indicó. Cuéntanos con qué llegas.</p>
+
+      <div class="opciones" id="opciones-plan">
+        <button class="opcion" onclick="selectOpcion(this,'plan-si')">
+          <div class="opcion-icon">📋</div>
+          <div class="opcion-body">
+            <div class="opcion-title">Sí, tengo mi plan nutricional</div>
+            <div class="opcion-sub">Lo prescribió mi nutrióloga, médico u otro especialista</div>
+          </div>
+          <div class="opcion-check"><div class="opcion-check-inner"></div></div>
+        </button>
+        <button class="opcion" onclick="selectOpcion(this,'plan-no-nutriologa')">
+          <div class="opcion-icon">🤝</div>
+          <div class="opcion-body">
+            <div class="opcion-title">No tengo plan — quiero consultar con una nutrióloga</div>
+            <div class="opcion-sub">Agrego una consulta con una nutrióloga aliada de Kiwilu</div>
+          </div>
+          <div class="opcion-check"><div class="opcion-check-inner"></div></div>
+        </button>
+        <button class="opcion" onclick="selectOpcion(this,'plan-no-esperar')">
+          <div class="opcion-icon">📅</div>
+          <div class="opcion-body">
+            <div class="opcion-title">Todavía no tengo plan — voy a consultarme primero</div>
+            <div class="opcion-sub">Agendo con mi nutrióloga y regreso cuando tenga el plan</div>
+          </div>
+          <div class="opcion-check"><div class="opcion-check-inner"></div></div>
+        </button>
+      </div>
+
+      <div class="btns">
+        <button class="btn-primary" onclick="goStep(3)">Continuar →</button>
+        <button class="btn-ghost" onclick="goStep(1)">← Regresar</button>
+      </div>
+    </div>
+
+    <!-- ══ PASO 3: Subir plan ══ -->
+    <div class="step" id="step-3">
+      <div class="step-eyebrow">Paso 3 de 4</div>
+      <h1 class="step-title">Comparte tu <em>plan.</em></h1>
+      <p class="step-sub">Lo aceptamos en cualquier formato. No necesita ser un documento oficial — cualquier cosa legible con alimentos, cantidades y tiempos de comida.</p>
+
+      <div class="formatos" id="formatos-wrap">
+        <div class="formato sel" onclick="toggleFormato(this)"><span class="formato-emoji">📄</span>PDF</div>
+        <div class="formato" onclick="toggleFormato(this)"><span class="formato-emoji">📷</span>Foto</div>
+        <div class="formato" onclick="toggleFormato(this)"><span class="formato-emoji">💬</span>WhatsApp</div>
+        <div class="formato" onclick="toggleFormato(this)"><span class="formato-emoji">✍️</span>Escrito a mano</div>
+        <div class="formato" onclick="toggleFormato(this)"><span class="formato-emoji">📱</span>Captura de pantalla</div>
+      </div>
+
+      <div class="upload-zone" onclick="showToast('Selección de archivo — próximamente')">
+        <div class="uz-emoji">📂</div>
+        <div class="uz-title">Arrastra tu plan aquí</div>
+        <div class="uz-sub">PDF, imagen, documento — cualquier formato es válido</div>
+      </div>
+
+      <div style="text-align:center;margin:12px 0;font-size:13px;color:var(--light)">— o envíalo por WhatsApp —</div>
+
+      <div class="wa-alt">
+        <div>
+          <div class="wa-alt-text">Envíanos tu plan directamente por WhatsApp</div>
+          <div class="wa-alt-sub">Lunes a viernes · Te respondemos en menos de 2 horas</div>
+        </div>
+        <button class="btn-wa" onclick="showToast('Abriendo WhatsApp...')">Abrir WhatsApp</button>
+      </div>
+
+      <div style="margin-top:20px">
+        <div class="field">
+          <label>¿Quién prescribió el plan?</label>
+          <input type="text" placeholder="Ej. Lic. María García, Nutrióloga · o Dr. Pérez, Endocrinólogo">
+          <div class="field-hint">El nombre de tu profesional de salud. No necesita estar registrado en Kiwilu.</div>
+        </div>
+      </div>
+
+      <div class="disclaimer">
+        <div class="disc-icon">⚠️</div>
+        <div>
+          <div class="disc-title">Aviso de responsabilidad</div>
+          <div class="disc-text">Al enviar el plan, confirmas que fue prescrito por un profesional de la salud certificado. Si el plan contiene información incorrecta o no proviene de un profesional, la responsabilidad recae únicamente en ti. Kiwilu cocina lo que se le indica — no verifica la autenticidad del plan.</div>
+          <label class="disc-check">
+            <input type="checkbox" id="chk-disclaimer">
+            <span class="disc-check-label">Entiendo y acepto la responsabilidad sobre la autenticidad del plan que estoy compartiendo.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="btns">
+        <button class="btn-primary" onclick="goStep(4)">Continuar →</button>
+        <button class="btn-ghost" onclick="goStep(2)">← Regresar</button>
+      </div>
+    </div>
+
+    <!-- ══ PASO 4: Resumen y confirmación ══ -->
+    <div class="step" id="step-4">
+      <div class="step-eyebrow">Paso 4 de 4</div>
+      <h1 class="step-title">Confirma tu <em>registro.</em></h1>
+      <p class="step-sub">Revisa que todo esté correcto. Después de confirmar, el equipo de Kiwilu revisará tu plan y te envía la cotización en menos de 24 horas.</p>
+
+      <div class="resumen-card">
+        <div class="rc-header">
+          <div class="rc-h-title">Resumen de tu registro</div>
+          <div class="rc-h-badge">Por confirmar</div>
+        </div>
+        <div class="rc-body">
+          <div class="rc-row">
+            <span class="rc-label">Nombre</span>
+            <span class="rc-val" id="r-nombre">—</span>
+          </div>
+          <div class="rc-row">
+            <span class="rc-label">WhatsApp</span>
+            <span class="rc-val" id="r-whatsapp">—</span>
+          </div>
+          <div class="rc-row">
+            <span class="rc-label">Correo</span>
+            <span class="rc-val" id="r-email">—</span>
+          </div>
+          <div class="rc-row">
+            <span class="rc-label">Plan nutricional</span>
+            <span class="rc-val" id="r-plan">Plan subido</span>
+          </div>
+          <div class="rc-row">
+            <span class="rc-label">Punto de recogida</span>
+            <span class="rc-val">Escápate Café · Saltillo</span>
+          </div>
+          <div class="rc-row">
+            <span class="rc-label">Horario</span>
+            <span class="rc-val">Lunes a viernes · 4–9 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="precio-card">
+        <div class="pc-left">
+          <div class="pc-label">Tu plan</div>
+          <div class="pc-plan">Suscripción semanal</div>
+          <div class="pc-sub">5 comidas · Pago anticipado cada miércoles</div>
+        </div>
+        <div class="pc-right">
+          <div class="pc-precio">Por cotizar</div>
+          <div class="pc-per">Te enviamos el precio en 24 hrs</div>
+        </div>
+      </div>
+
+      <div style="background:var(--el);border-radius:12px;padding:16px 20px;margin-bottom:24px;font-size:13.5px;color:var(--ed);line-height:1.65">
+        <strong>¿Qué pasa después?</strong> Revisamos tu plan, te enviamos la cotización por WhatsApp y confirmas el pago. Tu primera semana empieza el lunes siguiente al pago.
+      </div>
+
+      <div class="btns">
+        <button class="btn-primary" onclick="goStep(5)">Confirmar registro →</button>
+        <button class="btn-ghost" onclick="goStep(3)">← Revisar plan</button>
+      </div>
+    </div>
+
+    <!-- ══ PASO 5: Éxito ══ -->
+    <div class="step" id="step-5">
+      <div class="success-wrap">
+        <div class="success-icon">🎉</div>
+        <h1 class="success-title">¡Listo,<br><em>ya estás dentro!</em></h1>
+        <p class="success-sub">Recibimos tu plan. El equipo de Kiwilu lo está revisando y te enviará la cotización por WhatsApp en menos de 24 horas.</p>
+
+        <div class="success-steps">
+          <div class="ss-item">
+            <div class="ss-num">1</div>
+            <div class="ss-body">
+              <div class="ss-title">Revisamos tu plan</div>
+              <div class="ss-sub">Lo analizamos y calculamos el precio de tu semana según el plan nutricional.</div>
+            </div>
+          </div>
+          <div class="ss-item">
+            <div class="ss-num">2</div>
+            <div class="ss-body">
+              <div class="ss-title">Te enviamos la cotización por WhatsApp</div>
+              <div class="ss-sub">Menos de 24 horas. Confirmas y pagas desde ahí.</div>
+            </div>
+          </div>
+          <div class="ss-item">
+            <div class="ss-num">3</div>
+            <div class="ss-body">
+              <div class="ss-title">Tu primera semana empieza el lunes</div>
+              <div class="ss-sub">A partir de las 4 PM recibes aviso de que tu comida está lista en Escápate Café.</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" onclick="window.location.href='kiwilu-paciente-portal.html'" style="max-width:360px;margin:0 auto;display:block">Ver mi portal →</button>
+        <div style="text-align:center;margin-top:14px">
+          <a href="kiwilu-paciente.html" style="font-size:13.5px;color:var(--mid);text-decoration:none">Volver al inicio</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /right-body -->
+</div><!-- /right -->
+
+<div id="toast" style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;padding:12px 24px;border-radius:100px;font-size:13px;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap;font-weight:500;pointer-events:none"></div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 4;
+
+function goStep(n) {
+  // Leer campos del paso 1 para el resumen
+  if (currentStep === 1 && n > 1) {
+    const nombre = (document.getElementById('f-nombre').value || '—') + ' ' + (document.getElementById('f-apellido').value || '');
+    const wa = document.getElementById('f-whatsapp').value || '—';
+    const email = document.getElementById('f-email').value || '—';
+    document.getElementById('r-nombre').textContent = nombre.trim() || '—';
+    document.getElementById('r-whatsapp').textContent = wa;
+    document.getElementById('r-email').textContent = email;
+  }
+
+  // Determinar texto del plan en resumen
+  if (n === 4) {
+    const sel = document.querySelector('.opcion.selected');
+    if (sel) {
+      const t = sel.querySelector('.opcion-title').textContent.trim();
+      document.getElementById('r-plan').textContent = t.length > 40 ? t.substring(0, 40) + '…' : t;
+    }
+  }
+
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+
+  // Progress bar
+  document.querySelectorAll('.pstep').forEach(p => {
+    const s = parseInt(p.dataset.step);
+    p.classList.remove('active','done','pending');
+    if (s < n) p.classList.add('done');
+    else if (s === n) p.classList.add('active');
+    else p.classList.add('pending');
+  });
+
+  // Actualizar iconos de done
+  document.querySelectorAll('.pstep.done .pstep-num').forEach(el => {
+    el.textContent = '✓';
+  });
+  document.querySelectorAll('.pstep:not(.done) .pstep-num').forEach((el, i) => {
+    el.textContent = parseInt(el.closest('.pstep').dataset.step);
+  });
+
+  // Paso counter
+  if (n <= totalSteps) {
+    document.getElementById('rn-step').textContent = `Paso ${n} de ${totalSteps}`;
+  } else {
+    document.getElementById('rn-step').textContent = '¡Registro completo!';
+  }
+
+  currentStep = n;
+  window.scrollTo(0, 0);
+}
+
+function selectOpcion(el, val) {
+  document.querySelectorAll('.opcion').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function toggleFormato(el) {
+  el.classList.toggle('sel');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.opacity = 1;
+  setTimeout(() => t.style.opacity = 0, 2500);
+}
+</script>
+</body>
+</html>
