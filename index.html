@@ -3,816 +3,698 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kiwilu — Tu plan nutricional, cocinado para ti · Saltillo</title>
+<title>Kiwilu — La dieta que te recetó tu especialista, lista para comer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --e:#0F7A5A;--ed:#084D38;--el:#E6F5F0;--em:#3DAB84;
   --gold:#C4973A;--goldd:#9B7128;--goldl:#FBF4E6;
   --off:#F8F7F3;--dark:#141412;--mid:#5E5D59;--light:#B0AFA8;
+  --white:#fff;--border:rgba(0,0,0,.07);--cream:#F2F0EB;
 }
 body{font-family:'Outfit',sans-serif;background:var(--off);color:var(--dark);overflow-x:hidden}
 
-/* NAV */
-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 52px;background:rgba(248,247,243,.95);border-bottom:1px solid rgba(0,0,0,.06);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
-.logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--ed);text-decoration:none}
-.logo span{color:var(--gold)}
-.navlinks{display:flex;gap:28px;align-items:center}
-.navlinks a{font-size:13.5px;color:var(--mid);text-decoration:none;transition:color .2s}
-.navlinks a:hover{color:var(--e)}
-.nav-cta{background:var(--e);color:#fff;padding:9px 24px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;transition:background .2s}
+/* ══ NAV ══ */
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 52px;background:rgba(248,247,243,.96);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--ed);text-decoration:none;letter-spacing:-.01em}
+.logo em{color:var(--gold);font-style:italic}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-nut{font-size:13.5px;color:var(--mid);text-decoration:none;transition:color .2s}
+.nav-nut:hover{color:var(--e)}
+.nav-cta{background:var(--e);color:#fff;padding:10px 26px;border-radius:100px;font-size:13.5px;font-weight:600;text-decoration:none;transition:background .2s}
 .nav-cta:hover{background:var(--ed)}
 
-/* HERO */
-.hero{min-height:90vh;display:grid;grid-template-columns:55% 45%;overflow:hidden;background:var(--off)}
-.hero-left{padding:90px 56px 80px 52px;display:flex;flex-direction:column;justify-content:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--el);border:1px solid rgba(15,122,90,.15);color:var(--e);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:28px;width:fit-content}
-h1{font-family:'Cormorant Garamond',serif;font-size:60px;line-height:1.05;font-weight:600;color:var(--dark);margin-bottom:10px}
-h1 em{color:var(--e);font-style:italic}
-.hero-sub-line{font-family:'Cormorant Garamond',serif;font-size:60px;line-height:1.05;font-weight:400;font-style:italic;color:var(--gold);margin-bottom:28px}
-.hero-desc{font-size:17px;color:var(--mid);line-height:1.75;font-weight:300;max-width:480px;margin-bottom:36px}
-.hero-desc strong{color:var(--dark);font-weight:500}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
-.btn-primary{background:var(--e);color:#fff;padding:15px 36px;border-radius:100px;font-size:15px;font-weight:600;text-decoration:none;transition:background .2s;display:inline-block}
-.btn-primary:hover{background:var(--ed)}
-.btn-ghost-dark{background:transparent;color:var(--dark);padding:15px 28px;border-radius:100px;font-size:15px;border:1.5px solid rgba(0,0,0,.18);text-decoration:none;transition:all .2s;display:inline-block}
-.btn-ghost-dark:hover{border-color:var(--e);color:var(--e)}
-.hero-formats{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:14px}
-.hf-label{font-size:12px;color:var(--light);margin-right:2px}
-.hf-pill{font-size:11.5px;font-weight:500;color:var(--mid);background:#fff;border:1px solid rgba(0,0,0,.08);padding:4px 12px;border-radius:100px}
-.hero-trust{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.trust-item{font-size:12.5px;color:var(--light)}
-.trust-dot{width:3px;height:3px;border-radius:50%;background:var(--light);display:inline-block}
+/* ══ HERO ══ */
+.hero{background:var(--ed);display:grid;grid-template-columns:1fr 1fr;min-height:88vh;overflow:hidden;position:relative}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 75% 10%, rgba(196,151,58,.16) 0%, transparent 48%),radial-gradient(ellipse at 5% 90%, rgba(61,171,132,.13) 0%, transparent 44%)}
+.hero-left{padding:80px 48px 80px 52px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(196,151,58,.15);border:1px solid rgba(196,151,58,.3);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:32px;width:fit-content}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,4.5vw,60px);line-height:1.05;font-weight:600;color:#fff;margin-bottom:22px}
+.hero-h1 em{color:var(--em);font-style:italic}
+.hero-desc{font-size:16px;color:rgba(255,255,255,.6);line-height:1.78;font-weight:300;max-width:420px;margin-bottom:40px}
+.hero-proof{display:flex;flex-direction:column;gap:11px;margin-bottom:44px}
+.proof-item{display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,.5);font-weight:300}
+.proof-dot{width:6px;height:6px;border-radius:50%;background:var(--em);flex-shrink:0}
+.hero-cta-row{display:flex;align-items:center;gap:20px}
+.hero-btn{background:var(--em);color:#fff;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:600;text-decoration:none;transition:background .2s}
+.hero-btn:hover{background:var(--e)}
+.hero-link{font-size:14px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+.hero-link:hover{color:rgba(255,255,255,.7)}
 
-/* hero right */
-.hero-right{background:var(--ed);display:flex;align-items:center;justify-content:center;padding:60px 48px;position:relative;overflow:hidden}
-.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(196,151,58,.14) 0%,transparent 50%),radial-gradient(circle at 15% 80%,rgba(61,171,132,.1) 0%,transparent 40%)}
-.week-visual{width:290px;display:flex;flex-direction:column;gap:8px;position:relative;z-index:1;animation:fadeUp .7s .2s ease both}
-.wv-header{padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:6px}
-.wv-nut-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.wv-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--em),var(--ed));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;border:1.5px solid rgba(255,255,255,.2)}
-.wv-nut-name{font-size:12px;font-weight:500;color:#fff}
-.wv-nut-role{font-size:10px;color:rgba(255,255,255,.4)}
-.wv-week-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--em);margin-bottom:4px}
-.wv-week-title{font-size:13px;font-weight:500;color:rgba(255,255,255,.7)}
-.wv-day{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 14px}
-.wv-day.active{background:rgba(61,171,132,.15);border-color:rgba(61,171,132,.3)}
-.wv-day-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.wv-day-name{font-size:11px;font-weight:600;color:rgba(255,255,255,.5)}
-.wv-day.active .wv-day-name{color:var(--em)}
-.wv-day-kcal{font-size:10px;color:rgba(255,255,255,.3)}
-.wv-dish{font-size:12px;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:6px;padding:2px 0}
-.wv-dish-dot{width:4px;height:4px;border-radius:50%;background:var(--em);flex-shrink:0}
-.wv-status{display:flex;align-items:center;gap:5px;margin-top:7px}
-.wv-s-pill{font-size:10px;font-weight:600;padding:2px 9px;border-radius:100px}
-.s-ready{background:rgba(61,171,132,.2);color:var(--em)}
-.s-prep{background:rgba(196,151,58,.15);color:var(--gold)}
-.wv-pickup{margin-top:4px;background:var(--gold);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px}
-.wv-pickup-icon{font-size:16px}
-.wv-pickup-txt{font-size:12px;font-weight:600;color:var(--dark)}
-.wv-pickup-sub{font-size:10px;color:rgba(20,20,18,.55);margin-top:1px}
-.wv-formats{margin-top:4px;background:rgba(255,255,255,.05);border-radius:10px;padding:9px 12px}
-.wv-f-label{font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;font-weight:600}
-.wv-f-row{display:flex;gap:4px;flex-wrap:wrap}
-.wv-f-pill{font-size:10px;font-weight:500;color:rgba(255,255,255,.6);background:rgba(255,255,255,.08);padding:2px 8px;border-radius:100px}
+/* Hero imagen derecha */
+.hero-right{position:relative;z-index:1;display:flex;align-items:stretch;overflow:hidden}
+.hero-img{width:100%;height:100%;object-fit:cover;display:block;min-height:500px}
+.hero-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,var(--ed) 0%,rgba(8,77,56,.3) 40%,transparent 100%);pointer-events:none;z-index:1}
 
-/* GENERALES */
-.s-eyebrow{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.s-eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gold)}
-.s-title{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:var(--dark);line-height:1.1;margin-bottom:16px}
+/* ══ COMUNES ══ */
+.s-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--e);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.s-eyebrow::before{content:'';width:24px;height:1px;background:var(--em)}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.8vw,46px);font-weight:600;color:var(--dark);line-height:1.08;margin-bottom:12px}
 .s-title em{color:var(--e);font-style:italic}
-.s-sub{font-size:16px;color:var(--mid);line-height:1.7;font-weight:300;max-width:600px;margin-bottom:52px}
+.s-sub{font-size:15.5px;color:var(--mid);font-weight:300;line-height:1.7;max-width:520px;margin-bottom:48px}
+.section-wrap{max-width:1100px;margin:0 auto}
 
-/* PARA QUIÉN */
-section.para-quien{padding:88px 52px;background:#fff}
-.pq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.pq-card{border-radius:22px;padding:30px 26px;border:1px solid rgba(0,0,0,.06)}
-.pq-icon{font-size:34px;margin-bottom:16px}
-.pq-title{font-size:16px;font-weight:600;color:var(--dark);margin-bottom:10px}
-.pq-desc{font-size:13.5px;color:var(--mid);line-height:1.65;font-weight:300}
-.pq-check{margin-top:18px;font-size:12.5px;color:var(--e);font-weight:500;display:flex;align-items:center;gap:6px}
-.pq-check::before{content:'✓';width:18px;height:18px;border-radius:50%;background:var(--el);display:inline-flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0}
+/* ══ PARA QUIÉN ══ */
+.para-quien{padding:88px 52px;background:var(--white)}
+.pq-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.pq-left .s-sub{margin-bottom:0}
+.pq-list{display:flex;flex-direction:column}
+.pq-item{display:flex;align-items:center;gap:18px;padding:20px 0;border-bottom:1px solid var(--border)}
+.pq-item:last-child{border-bottom:none}
+.pq-dot{width:28px;height:28px;border-radius:50%;background:var(--el);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--e);font-size:13px;font-weight:700}
+.pq-text{font-size:16px;font-weight:600;color:var(--dark);line-height:1.3}
 
-/* CÓMO FUNCIONA */
-section.how{padding:88px 52px;background:var(--off)}
-.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative}
-.how-grid::before{content:'';position:absolute;top:44px;left:calc(12.5% + 20px);right:calc(12.5% + 20px);height:1px;background:repeating-linear-gradient(90deg,var(--em) 0,var(--em) 6px,transparent 6px,transparent 14px);opacity:.3;pointer-events:none}
-.how-step{background:#fff;border-radius:22px;padding:28px 24px;border:1px solid rgba(0,0,0,.05);text-align:center}
-.how-num{width:52px;height:52px;border-radius:50%;background:var(--ed);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin:0 auto 16px;border:3px solid var(--off)}
-.how-icon{font-size:26px;margin-bottom:12px}
-.how-title{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:8px}
-.how-desc{font-size:13px;color:var(--mid);line-height:1.6;font-weight:300}
-.how-tag{display:inline-block;margin-top:12px;font-size:11px;color:var(--e);background:var(--el);padding:3px 11px;border-radius:100px;font-weight:500}
+/* ══ MENÚ SEMANAL ══ */
+.menu-sec{padding:88px 52px;background:var(--off)}
+.menu-top{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:40px}
+.menu-top-right{font-size:15px;color:var(--mid);line-height:1.7;font-weight:300;max-width:340px;justify-self:end}
+.dtabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.dtab{padding:9px 20px;border-radius:100px;font-size:13px;cursor:pointer;border:1px solid rgba(0,0,0,.1);background:transparent;color:var(--mid);font-family:'Outfit',sans-serif;transition:all .15s}
+.dtab:hover{border-color:var(--e);color:var(--e)}
+.dtab.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+.dshow{display:grid;grid-template-columns:1fr 1fr;border-radius:20px;overflow:hidden;border:1px solid var(--border)}
+.dvis{position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:36px;min-height:420px}
+.dvbg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:130px;opacity:.18;user-select:none}
+.dvday{font-size:11px;color:var(--e);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px;position:relative}
+.dvname{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--ed);line-height:1.15;position:relative;margin-bottom:14px;font-weight:600}
+.gipill{display:inline-flex;align-items:center;gap:6px;font-size:12px;background:rgba(255,255,255,.75);padding:5px 14px;border-radius:100px;color:var(--ed);font-weight:500;position:relative;backdrop-filter:blur(4px)}
+.gidot{width:7px;height:7px;border-radius:50%}
+.gilow{background:var(--e)}.gimid{background:#BA7517}
+.dinfo{padding:28px;display:flex;flex-direction:column;gap:14px;background:#fff}
+.ib{padding:14px;background:var(--off);border-radius:12px}
+.ibt{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--light);font-weight:700;margin-bottom:10px}
+.tagcloud{display:flex;flex-wrap:wrap;gap:5px}
+.itag{font-size:11px;color:var(--ed);background:var(--el);padding:3px 10px;border-radius:100px}
+.vtag{font-size:11px;color:#534AB7;background:#EEEDFE;padding:3px 10px;border-radius:100px}
+.nrow{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.nc{text-align:center;background:#fff;border-radius:8px;padding:8px 4px}
+.ncv{font-size:15px;font-weight:600;color:var(--dark)}
+.ncl{font-size:10px;color:var(--light);margin-top:2px}
+.ben{display:flex;gap:8px;font-size:13px;color:var(--mid);padding:5px 0;border-bottom:1px solid rgba(0,0,0,.04)}
+.ben:last-child{border-bottom:none}
+.bdot{width:5px;height:5px;border-radius:50%;background:var(--em);flex-shrink:0;margin-top:5px}
 
-/* TU PLAN EN CUALQUIER FORMATO */
-section.formats{padding:88px 52px;background:#fff}
-.formats-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.format-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.fcard{background:var(--off);border-radius:18px;padding:22px 20px;border:1px solid rgba(0,0,0,.05)}
-.fcard-icon{font-size:28px;margin-bottom:10px}
-.fcard-title{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:5px}
-.fcard-desc{font-size:12.5px;color:var(--mid);font-weight:300;line-height:1.5}
-.fcard-example{margin-top:10px;font-size:11px;color:var(--e);background:var(--el);padding:3px 10px;border-radius:100px;display:inline-block;font-weight:500}
-.disclaimer-box{background:var(--goldl);border:1px solid rgba(196,151,58,.25);border-radius:20px;padding:26px 28px;margin-top:28px;display:flex;gap:16px;align-items:flex-start}
-.db-icon{font-size:20px;flex-shrink:0;margin-top:2px}
-.db-title{font-size:13.5px;font-weight:600;color:var(--goldd);margin-bottom:6px}
-.db-desc{font-size:13px;color:var(--mid);line-height:1.65;font-weight:300}
-.db-desc strong{color:var(--dark);font-weight:600}
+/* ══ FIDELIDAD AL PLAN ══ */
+.fidelidad{padding:88px 52px;background:var(--white)}
+.fidelidad-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:1100px;margin:0 auto}
+.fid-items{display:flex;flex-direction:column;gap:0;margin-top:36px}
+.fid-item{display:flex;align-items:flex-start;gap:16px;padding:22px 0;border-bottom:1px solid var(--border)}
+.fid-item:last-child{border-bottom:none}
+.fid-dot{width:8px;height:8px;border-radius:50%;background:var(--em);flex-shrink:0;margin-top:6px}
+.fid-head{font-size:15.5px;font-weight:700;color:var(--dark);margin-bottom:5px;line-height:1.3}
+.fid-desc{font-size:13.5px;color:var(--mid);font-weight:300;line-height:1.65}
+.fid-img-wrap{border-radius:22px;overflow:hidden;position:relative;aspect-ratio:4/5}
+.fid-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.fid-img-badge{position:absolute;bottom:20px;left:20px;right:20px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.fid-badge-icon{width:36px;height:36px;border-radius:10px;background:var(--el);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.fid-badge-txt{font-size:12.5px;font-weight:600;color:var(--dark);line-height:1.3}
+.fid-badge-sub{font-size:11px;color:var(--mid);font-weight:300;margin-top:1px}
+/* Visual contenedor */
+.container-visual{background:var(--ed);border-radius:22px;padding:32px;position:relative;overflow:hidden}
+.container-visual::before{content:'🍱';position:absolute;bottom:-20px;right:-10px;font-size:120px;opacity:.06;user-select:none}
+.cv-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:6px}
+.cv-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#fff;line-height:1.15;margin-bottom:14px}
+.cv-tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+.cv-tag{font-size:11px;font-weight:500;color:var(--em);background:rgba(61,171,132,.15);border:1px solid rgba(61,171,132,.2);padding:3px 10px;border-radius:100px}
+.cv-divider{height:1px;background:rgba(255,255,255,.08);margin-bottom:18px}
+.cv-macro-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:22px}
+.cv-macro{background:rgba(255,255,255,.06);border-radius:10px;padding:10px 8px;text-align:center}
+.cv-macro-v{font-size:18px;font-weight:700;color:#fff;font-family:'Cormorant Garamond',serif}
+.cv-macro-l{font-size:10px;color:rgba(255,255,255,.35);margin-top:2px}
+.cv-nut-credit{display:flex;align-items:center;gap:10px}
+.cv-nut-av{width:30px;height:30px;border-radius:50%;background:var(--em);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.cv-nut-txt{font-size:12px;color:rgba(255,255,255,.4)}
+.cv-nut-name{color:rgba(255,255,255,.7);font-weight:600}
 
-/* ¿AÚN NO TIENES NUTRIÓLOGA? */
-section.no-plan{padding:0}
-.no-plan-banner{background:var(--ed);padding:80px 52px;position:relative;overflow:hidden}
-.no-plan-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 90% 10%,rgba(196,151,58,.15) 0%,transparent 50%)}
-.npb-inner{position:relative;z-index:1}
-.npb-eyebrow{font-size:11px;color:var(--em);text-transform:uppercase;letter-spacing:.14em;font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:8px}
-.npb-eyebrow::before{content:'';width:18px;height:1.5px;background:var(--em)}
-.npb-title{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:600;color:#fff;line-height:1.08;margin-bottom:14px}
-.npb-title em{color:var(--em);font-style:italic}
-.npb-sub{font-size:16px;color:rgba(255,255,255,.55);font-weight:300;line-height:1.7;max-width:540px;margin-bottom:52px}
-.routes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.route-card{border-radius:22px;padding:30px 26px;display:flex;flex-direction:column}
-.route-main{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13)}
-.route-ref{background:rgba(61,171,132,.1);border:1px solid rgba(61,171,132,.2)}
-.route-np{background:rgba(196,151,58,.1);border:1px solid rgba(196,151,58,.2)}
-.route-num{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
-.route-main .route-num{color:rgba(255,255,255,.3)}
-.route-ref .route-num{color:var(--em)}
-.route-np .route-num{color:var(--gold)}
-.route-icon{font-size:32px;margin-bottom:14px}
-.route-title{font-size:17px;font-weight:600;line-height:1.25;margin-bottom:10px;color:#fff}
-.route-desc{font-size:13.5px;font-weight:300;line-height:1.65;margin-bottom:22px;flex:1}
-.route-main .route-desc{color:rgba(255,255,255,.6)}
-.route-ref .route-desc{color:rgba(255,255,255,.6)}
-.route-np .route-desc{color:rgba(255,255,255,.55)}
-.route-np .route-desc strong{color:#fff}
-.route-btn{display:block;padding:11px 22px;border-radius:100px;font-size:13px;font-weight:600;text-decoration:none;text-align:center;transition:all .2s}
-.route-main .route-btn{background:var(--em);color:#fff}
-.route-main .route-btn:hover{background:#2d9470}
-.route-ref .route-btn{background:rgba(61,171,132,.25);color:var(--em);border:1px solid rgba(61,171,132,.35)}
-.route-ref .route-btn:hover{background:rgba(61,171,132,.4)}
-.route-np .route-btn{background:var(--gold);color:var(--dark)}
-.route-np .route-btn:hover{background:#d4a840}
-.np-note{margin-top:10px;font-size:11px;color:rgba(255,255,255,.3);text-align:center}
-.np-note a{color:rgba(255,255,255,.45);text-decoration:none}
-.np-note a:hover{color:#fff}
+/* ══ NUTRIÓLOGAS ══ */
+.nutriologas{padding:88px 52px;background:var(--off)}
+.nut-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.nut-card{background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:box-shadow .2s,border-color .2s}
+.nut-card:hover{border-color:var(--em);box-shadow:0 8px 32px rgba(15,122,90,.1)}
+.nut-card-top{padding:26px 24px 18px;display:flex;align-items:flex-start;gap:14px}
+.nut-av{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;flex-shrink:0;border:2px solid}
+.nut-av.a1{background:var(--el);color:var(--ed);border-color:var(--em)}
+.nut-av.a2{background:#E6F1FB;color:#185FA5;border-color:#85B7EB}
+.nut-av.a3{background:var(--goldl);color:var(--goldd);border-color:var(--gold)}
+.nut-meta{flex:1}
+.nut-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--dark);margin-bottom:2px;font-weight:600}
+.nut-title{font-size:12px;color:var(--mid);margin-bottom:6px}
+.nut-stars{color:#BA7517;font-size:12px}
+.nut-card-body{padding:0 24px 20px}
+.nut-badge{display:inline-block;font-size:11px;font-weight:600;padding:3px 12px;border-radius:100px;margin-bottom:14px}
+.nut-badge.b1{color:var(--e);background:var(--el)}
+.nut-badge.b2{color:#185FA5;background:#E6F1FB}
+.nut-badge.b3{color:var(--goldd);background:var(--goldl)}
+.nut-price{font-size:32px;font-weight:700;color:var(--dark);line-height:1;margin-bottom:2px;font-family:'Cormorant Garamond',serif}
+.nut-price-sub{font-size:12.5px;color:var(--mid);margin-bottom:14px}
+.nut-insumos{display:inline-flex;align-items:center;gap:7px;background:var(--off);border:1px solid var(--border);border-radius:100px;padding:5px 12px;margin-bottom:14px;font-size:12px;color:var(--mid)}
+.nut-insumos strong{color:var(--dark);font-weight:600}
+.nut-opciones{display:inline-flex;align-items:center;gap:7px;background:var(--off);border:1px solid var(--border);border-radius:100px;padding:6px 14px;margin-bottom:14px;font-size:12.5px;color:var(--dark);font-weight:600}
+.nut-opciones .nop-icon{font-size:14px}
+.nut-opciones.highlight{background:var(--goldl);border-color:rgba(196,151,58,.25);color:var(--goldd)}
+.nut-cocina-para{margin-bottom:14px}
+.nut-cp-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--light);margin-bottom:7px}
+.nut-cp-tags{display:flex;flex-wrap:wrap;gap:5px}
+.nut-cp-tag{font-size:11px;color:var(--mid);background:var(--off);border:1px solid var(--border);padding:3px 10px;border-radius:100px}
+.nut-plato{background:var(--off);border-radius:11px;padding:12px 14px;margin-bottom:14px}
+.nut-plato-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;color:var(--light);margin-bottom:4px}
+.nut-plato-name{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:2px}
+.nut-plato-sub{font-size:11.5px;color:var(--mid);font-weight:300}
+.nut-features{display:flex;flex-direction:column}
+.nut-feat{font-size:13px;color:var(--mid);padding:7px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center}
+.nut-feat:last-child{border-bottom:none}
+.nut-feat::before{content:'—';color:var(--em);flex-shrink:0}
+.nut-card-foot{padding:14px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.nut-cupo{font-size:12px;color:var(--mid)}
+.nut-cupo span{color:var(--e);font-weight:600}
+.nut-btn{font-size:12.5px;font-weight:600;color:var(--e);background:var(--el);border:none;padding:7px 18px;border-radius:100px;cursor:pointer;text-decoration:none;transition:background .15s}
+.nut-btn:hover{background:#d0ede4}
+.nut-btn.wait{color:var(--light);background:var(--off)}
+.nut-note{font-size:12px;color:var(--light);margin-top:20px;text-align:center}
 
-/* QUÉ RECIBES */
-section.receives{padding:88px 52px;background:var(--off)}
-.receives-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.receives-list{display:flex;flex-direction:column}
-.rv-item{display:flex;gap:16px;align-items:flex-start;padding:22px 0;border-bottom:1px solid rgba(0,0,0,.05)}
-.rv-item:last-child{border-bottom:none}
-.rv-num{width:40px;height:40px;border-radius:12px;background:var(--el);color:var(--e);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.rv-head{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:5px}
-.rv-desc{font-size:13.5px;color:var(--mid);line-height:1.6;font-weight:300}
-.container-visual{background:var(--goldl);border-radius:28px;padding:36px;border:1px solid rgba(196,151,58,.2);display:flex;flex-direction:column;gap:16px}
-.cv-label{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
-.cv-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--ed);line-height:1.2;margin-bottom:12px}
-.cv-tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
-.cv-tag{font-size:11px;background:#fff;color:var(--mid);padding:3px 11px;border-radius:100px;border:1px solid rgba(0,0,0,.08)}
-.cv-divider{height:1px;background:rgba(196,151,58,.2)}
-.cv-macro-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.cv-macro{text-align:center;background:#fff;border-radius:12px;padding:10px 6px}
-.cv-macro-v{font-size:16px;font-weight:600;color:var(--dark)}
-.cv-macro-l{font-size:10px;color:var(--light);margin-top:2px}
-.cv-footer{background:var(--ed);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px}
-.cv-footer-icon{font-size:20px}
-.cv-footer-txt{font-size:12px;font-weight:600;color:#fff}
-.cv-footer-sub{font-size:10px;color:rgba(255,255,255,.45);margin-top:2px}
-.cv-nut-credit{background:rgba(255,255,255,.08);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px}
-.cv-nut-av{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600}
-.cv-nut-txt{font-size:11px;color:rgba(255,255,255,.6)}
-.cv-nut-name{font-weight:600;color:#fff}
-
-/* PICKUP */
-section.pickup{padding:88px 52px;background:#fff}
-.pickup-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
-.pickup-card{background:var(--ed);border-radius:28px;padding:44px;text-align:center;position:relative;overflow:hidden}
-.pickup-card::before{content:'☕';position:absolute;bottom:-16px;right:-10px;font-size:140px;opacity:.07;user-select:none}
-.pc-badge{background:var(--gold);color:var(--dark);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px;display:inline-block;margin-bottom:18px}
-.pc-name{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:#fff;margin-bottom:8px}
-.pc-sub{font-size:14px;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:24px}
-.pc-hours{display:flex;flex-direction:column;gap:6px;margin-bottom:24px}
-.pc-hour-row{display:flex;justify-content:space-between;padding:10px 16px;background:rgba(255,255,255,.06);border-radius:10px;font-size:13px}
-.pc-hour-day{color:rgba(255,255,255,.6)}
-.pc-hour-time{color:#fff;font-weight:500}
-.pc-cta{background:var(--em);color:#fff;font-size:13px;font-weight:600;padding:11px 26px;border-radius:100px;text-decoration:none;display:inline-block;transition:background .2s}
-.pc-cta:hover{background:#2d9470}
-.pi-steps{display:flex;flex-direction:column;gap:14px;margin-bottom:36px}
-.pi-step{display:flex;gap:14px;align-items:flex-start}
-.pi-step-num{width:32px;height:32px;border-radius:50%;background:var(--el);color:var(--e);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
-.pi-step-head{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:3px}
-.pi-step-desc{font-size:13px;color:var(--mid);font-weight:300;line-height:1.5}
-
-/* PRECIOS */
-section.precios{padding:88px 52px;background:var(--off)}
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px}
-.price-card{border-radius:24px;padding:32px 28px;border:1px solid rgba(0,0,0,.07);background:var(--off);position:relative}
-.price-card.featured{background:var(--ed);border-color:transparent}
-.pc-popular{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--dark);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 16px;border-radius:100px;white-space:nowrap}
-.price-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
-.price-card:not(.featured) .price-label{color:var(--e)}
-.price-card.featured .price-label{color:var(--em)}
-.price-val{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:600;line-height:1;margin-bottom:4px}
-.price-card:not(.featured) .price-val{color:var(--dark)}
-.price-card.featured .price-val{color:#fff}
-.price-per{font-size:13px;font-weight:300;margin-bottom:20px}
-.price-card:not(.featured) .price-per{color:var(--mid)}
-.price-card.featured .price-per{color:rgba(255,255,255,.5)}
-.price-divider{height:1px;margin-bottom:20px}
-.price-card:not(.featured) .price-divider{background:rgba(0,0,0,.06)}
-.price-card.featured .price-divider{background:rgba(255,255,255,.1)}
-.price-items{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
-.price-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;font-weight:300}
-.price-card:not(.featured) .price-item{color:var(--mid)}
-.price-card.featured .price-item{color:rgba(255,255,255,.7)}
-.pi-check{width:16px;height:16px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;margin-top:2px}
-.price-card:not(.featured) .pi-check{background:var(--el);color:var(--e)}
-.price-card.featured .pi-check{background:rgba(61,171,132,.25);color:var(--em)}
-.price-btn{width:100%;padding:12px;border-radius:100px;font-size:14px;font-weight:600;text-align:center;text-decoration:none;display:block;transition:all .2s;border:none;cursor:pointer;font-family:'Outfit',sans-serif}
-.price-card:not(.featured) .price-btn{background:var(--dark);color:#fff}
-.price-card:not(.featured) .price-btn:hover{background:var(--e)}
-.price-card.featured .price-btn{background:var(--gold);color:var(--dark)}
-.price-card.featured .price-btn:hover{background:#d4a840}
-.price-note{background:var(--goldl);border:1px solid rgba(196,151,58,.2);border-radius:16px;padding:20px 24px;font-size:13.5px;color:var(--mid);line-height:1.65;font-weight:300;text-align:center}
-.price-note strong{color:var(--dark);font-weight:600}
-
-/* TESTIMONIALES */
-section.testi{padding:88px 52px;background:var(--ed)}
-.testi-header{text-align:center;margin-bottom:52px}
-.testi-title{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:#fff;line-height:1.1}
-.testi-title em{color:var(--em);font-style:italic}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.tcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:28px}
-.tcard-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:14px}
-.tcard-quote{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.6;margin-bottom:18px}
-.tcard-div{width:24px;height:1.5px;background:var(--gold);margin-bottom:14px}
-.tcard-name{font-size:14px;font-weight:600;color:#fff}
-.tcard-role{font-size:12px;color:rgba(255,255,255,.4);margin-top:3px;font-weight:300}
-.tcard-nut{margin-top:10px;display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--em);background:rgba(61,171,132,.12);padding:3px 10px;border-radius:100px}
-
-/* FAQ */
-section.faq{padding:88px 52px;background:var(--off)}
-.faq-wrap{max-width:720px;margin:0 auto}
-.faq-item{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:14px;overflow:hidden;margin-bottom:6px}
-.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;cursor:pointer;font-size:14px;font-weight:500;color:var(--dark);user-select:none}
-.faq-q:hover{color:var(--e)}
-.faq-icon{width:22px;height:22px;border-radius:50%;background:var(--el);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--e);transition:transform .2s;flex-shrink:0}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;font-size:13.5px;color:var(--mid);line-height:1.65;font-weight:300}
-.faq-a.open{max-height:220px;padding:0 22px 18px}
-.faq-icon.open{transform:rotate(45deg)}
-
-/* CTA FINAL */
-section.cta-final{padding:110px 52px;background:var(--off);text-align:center}
-.cta-eyebrow{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-weight:600;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:10px}
-.cta-eyebrow::before,.cta-eyebrow::after{content:'';flex:1;max-width:32px;height:1px;background:var(--gold);opacity:.5}
-.cta-title{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:var(--dark);line-height:1.06;margin-bottom:20px}
+/* ══ CTA FINAL ══ */
+.cta-final{padding:100px 52px;background:var(--white);text-align:center}
+.cta-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--e);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:10px}
+.cta-eyebrow::before,.cta-eyebrow::after{content:'';width:24px;height:1px;background:var(--em)}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5vw,62px);font-weight:600;color:var(--dark);line-height:1.05;margin-bottom:16px}
 .cta-title em{color:var(--e);font-style:italic}
-.cta-sub{font-size:16.5px;color:var(--mid);line-height:1.7;max-width:500px;margin:0 auto 44px;font-weight:300}
-.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.cta-note{margin-top:20px;font-size:12.5px;color:var(--light)}
-.cta-note a{color:var(--e);text-decoration:none}
+.cta-sub{font-size:16px;color:var(--mid);font-weight:300;line-height:1.7;max-width:440px;margin:0 auto 44px}
+.cta-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.cta-btn-p{background:var(--e);color:#fff;padding:16px 36px;border-radius:100px;font-size:15.5px;font-weight:600;text-decoration:none;transition:background .2s}
+.cta-btn-p:hover{background:var(--ed)}
+.cta-btn-s{background:transparent;color:var(--dark);border:1.5px solid rgba(0,0,0,.15);padding:16px 28px;border-radius:100px;font-size:15.5px;font-weight:500;text-decoration:none;transition:border-color .2s,color .2s}
+.cta-btn-s:hover{border-color:var(--e);color:var(--e)}
 
-/* STRIP / FOOTER */
-.strip{background:var(--dark);padding:22px 52px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
-.strip-left{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-style:italic}
-.strip-left span{color:var(--em)}
-.strip-links{display:flex;gap:24px}
-.strip-links a{font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
-.strip-links a:hover{color:#fff}
-footer{padding:40px 52px;background:var(--off);border-top:1px solid rgba(0,0,0,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.flogo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ed)}
-.flogo span{color:var(--gold)}
-.flinks{display:flex;gap:20px;flex-wrap:wrap}
-.flinks a{font-size:13px;color:var(--light);text-decoration:none;transition:color .2s}
-.flinks a:hover{color:var(--e)}
-.ftxt{font-size:12px;color:var(--light)}
+/* ══ FORMULARIO ══ */
+.registro-wrap{padding:88px 52px;background:var(--el);border-top:1px solid rgba(15,122,90,.12)}
+.registro-inner{max-width:580px;margin:0 auto}
+.form-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--e);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.form-eyebrow::before{content:'';width:24px;height:1px;background:var(--em)}
+.form-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--dark);line-height:1.1;margin-bottom:8px}
+.form-title em{color:var(--e);font-style:italic}
+.form-sub{font-size:15px;color:var(--mid);font-weight:300;line-height:1.7;margin-bottom:36px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.1em;margin-bottom:7px}
+.field input,.field select{width:100%;padding:13px 16px;border:1.5px solid rgba(15,122,90,.15);border-radius:11px;font-size:15px;font-family:'Outfit',sans-serif;color:var(--dark);background:var(--white);outline:none;transition:.15s;-webkit-appearance:none;appearance:none;cursor:pointer}
+.field input:focus,.field select:focus{border-color:var(--e);box-shadow:0 0 0 3px rgba(15,122,90,.08)}
+.field-hint{font-size:12px;color:var(--light);margin-top:5px;line-height:1.5}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.select-wrap{position:relative}
+.select-wrap::after{content:'▾';position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--light);pointer-events:none;font-size:13px}
+.nutripalm-alert{display:none;background:var(--goldl);border:1px solid rgba(196,151,58,.3);border-radius:11px;padding:14px 16px;margin-bottom:16px}
+.nutripalm-alert.visible{display:block}
+.na-title{font-size:13px;font-weight:600;color:var(--goldd);margin-bottom:3px}
+.na-sub{font-size:12.5px;color:var(--goldd);font-weight:300;line-height:1.5}
+.na-link{color:var(--goldd);font-weight:600;text-decoration:underline}
+.btn-submit{width:100%;background:var(--e);color:#fff;border:none;padding:15px 28px;border-radius:100px;font-size:15.5px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:background .2s;margin-top:8px}
+.btn-submit:hover{background:var(--ed)}
+.form-legal{font-size:11.5px;color:var(--light);text-align:center;margin-top:12px;line-height:1.6}
+.form-success{display:none;text-align:center;padding:48px 0}
+.form-success.visible{display:block}
+.success-icon{font-size:52px;margin-bottom:18px}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--dark);margin-bottom:12px;line-height:1.1}
+.success-title em{color:var(--e);font-style:italic}
+.success-sub{font-size:15px;color:var(--mid);line-height:1.75;font-weight:300;max-width:400px;margin:0 auto}
 
-/* ANIMACIONES */
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.hero-left>*{animation:fadeUp .6s ease both}
-.hero-badge{animation-delay:.05s}
-h1{animation-delay:.12s}
-.hero-sub-line{animation-delay:.17s}
-.hero-desc{animation-delay:.22s}
-.hero-actions{animation-delay:.28s}
-.hero-formats{animation-delay:.33s}
-.hero-trust{animation-delay:.37s}
+/* ══ FAQ ══ */
+.faq{padding:72px 52px 0;background:var(--ed)}
+.faq-inner{max-width:760px;margin:0 auto;padding-bottom:72px}
+.faq-top{text-align:center;margin-bottom:40px}
+.faq-top-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.5vw,42px);font-weight:600;color:#fff;line-height:1.1;margin-bottom:8px}
+.faq-top-title em{color:var(--em);font-style:italic}
+.faq-top-sub{font-size:14px;color:rgba(255,255,255,.35);font-weight:300}
+.faq-list{display:flex;flex-direction:column;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.faq-item{background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;cursor:pointer;font-size:14.5px;font-weight:500;color:rgba(255,255,255,.8);gap:16px;transition:color .15s}
+.faq-q:hover{color:#fff}
+.faq-icon{font-size:18px;color:rgba(255,255,255,.25);flex-shrink:0;transition:transform .25s;line-height:1}
+.faq-icon.open{transform:rotate(45deg);color:var(--em)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a.open{max-height:200px}
+.faq-a-inner{padding:0 22px 18px;font-size:13.5px;color:rgba(255,255,255,.45);font-weight:300;line-height:1.7}
+.faq-divider{height:1px;background:rgba(255,255,255,.12)}
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  nav{padding:16px 24px}.navlinks{display:none}
-  .hero{grid-template-columns:1fr}
-  .hero-left{padding:52px 24px}
+/* ══ FOOTER ══ */
+footer{background:var(--ed);padding:36px 52px;display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#fff}
+.f-logo em{color:var(--gold);font-style:italic}
+.f-links{display:flex;gap:24px}
+.f-links a{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s}
+.f-links a:hover{color:rgba(255,255,255,.7)}
+.f-copy{font-size:12px;color:rgba(255,255,255,.25)}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:960px){
+  nav{padding:14px 24px}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:56px 24px 40px}
   .hero-right{padding:0 24px 52px}
-  h1,.hero-sub-line{font-size:40px}
-  .pq-grid,.how-grid,.formats-layout,.receives-layout,
-  .pickup-grid,.price-grid,.testi-grid,.routes-grid{grid-template-columns:1fr}
-  .how-grid::before{display:none}
-  .format-cards{grid-template-columns:1fr 1fr}
-  section.para-quien,section.how,section.formats,section.receives,
-  section.pickup,section.precios,section.testi,section.faq,section.cta-final{padding:56px 24px}
-  .no-plan-banner{padding:56px 24px}
-  .s-title{font-size:34px}.npb-title{font-size:32px}.cta-title{font-size:38px}
-  footer,.strip{padding:20px 24px}
+  .para-quien,.menu-sec,.fidelidad,.nutriologas,.cta-final,.registro-wrap{padding:64px 24px}
+  .fidelidad-layout{grid-template-columns:1fr;gap:36px}
+  .fid-img-wrap{max-height:400px}
+  .pq-layout{grid-template-columns:1fr;gap:36px}
+  .faq{padding:56px 24px 0}
+  .faq-inner{padding-bottom:56px}
+  footer{padding:28px 24px;flex-direction:column;gap:16px;text-align:center}
+  .nut-grid{grid-template-columns:1fr}
+  .fidelidad-layout{grid-template-columns:1fr;gap:40px}
+  .menu-top{grid-template-columns:1fr;gap:20px}
+  .menu-top-right{justify-self:start;max-width:100%}
+  .dshow{grid-template-columns:1fr}
+  .dvis{min-height:280px}
+  .f-links{flex-wrap:wrap;justify-content:center;gap:14px}
+  .cta-actions{flex-direction:column;align-items:center}
+  .field-row{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .hero-h1{font-size:38px}
+  .hero-right{min-height:300px}
 }
 </style>
 </head>
 <body>
 
+<!-- ══ NAV ══ -->
 <nav>
-  <a href="index.html" class="logo">Kiwi<span>lu</span></a>
-  <div class="navlinks">
-    <a href="#como-funciona">Cómo funciona</a>
-    <a href="#sin-plan">¿Sin plan?</a>
-    <a href="#que-recibes">Qué recibes</a>
-    <a href="#precios">Precios</a>
-    <a href="#empezar" class="nav-cta">Empezar →</a>
+  <a href="/" class="logo">Kiwi<em>lu</em></a>
+  <div class="nav-right">
+    <a href="kiwilu-nutriologa.html" class="nav-nut">¿Eres nutrióloga?</a>
+    <a href="#registro" class="nav-cta">Registrarme →</a>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ══ HERO ══ -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-badge">Para pacientes · Saltillo</div>
-    <h1>Tu plan nutricional,</h1>
-    <div class="hero-sub-line">cocinado para ti.</div>
-    <p class="hero-desc">
-      Tienes una dieta prescrita por tu nutrióloga o especialista de salud.
-      <strong>Tráenos el plan en el formato que tengas</strong> y lo cocinamos exactamente como dice — listo para recoger en Escápate Café.
-    </p>
-    <div class="hero-actions">
-      <a href="#empezar" class="btn-primary">Quiero empezar esta semana →</a>
-      <a href="#como-funciona" class="btn-ghost-dark">Cómo funciona</a>
-    </div>
-    <div class="hero-formats">
-      <span class="hf-label">Aceptamos:</span>
-      <span class="hf-pill">📄 PDF</span>
-      <span class="hf-pill">📸 Foto</span>
-      <span class="hf-pill">✍️ Escrito a mano</span>
-      <span class="hf-pill">💬 WhatsApp</span>
-    </div>
-    <div class="hero-trust">
-      <span class="trust-item">✓ Cualquier nutrióloga o especialista</span>
-      <span class="trust-dot"></span>
-      <span class="trust-item">✓ Fiel a cada indicación</span>
-      <span class="trust-dot"></span>
-      <span class="trust-item">✓ Sin contratos</span>
+    <div class="hero-badge">Tu plan. Tu especialista. Tu comida.</div>
+    <h1 class="hero-h1">La dieta que te recetó<br>tu especialista,<br><em>lista para comer.</em></h1>
+    <p class="hero-desc">Una nutrióloga cocinará tu plan nutricional, respetando ingredientes, gramos y todas las indicaciones que cuiden tu salud.</p>
+    <div class="hero-cta-row">
+      <a href="#registro" class="hero-btn">Quiero empezar →</a>
     </div>
   </div>
+
+  <!-- Imagen hero -->
   <div class="hero-right">
-    <div class="week-visual">
-      <div class="wv-header">
-        <div class="wv-nut-row">
-          <div class="wv-av">LG</div>
-          <div>
-            <div class="wv-nut-name">Plan de la Lic. Laura González</div>
-            <div class="wv-nut-role">Recibido vía foto · Semana activa</div>
-          </div>
-        </div>
-        <div class="wv-week-label">Esta semana</div>
-        <div class="wv-week-title">Dieta 1,200 kcal/día · 3 tiempos</div>
-      </div>
-      <div class="wv-day active">
-        <div class="wv-day-top"><div class="wv-day-name">Hoy · Martes</div><div class="wv-day-kcal">1,200 kcal</div></div>
-        <div class="wv-dish"><div class="wv-dish-dot"></div>Avena proteica con frutos rojos</div>
-        <div class="wv-dish"><div class="wv-dish-dot"></div>Pollo al limón + quinoa + espinacas</div>
-        <div class="wv-dish"><div class="wv-dish-dot"></div>Ensalada mediterránea ligera</div>
-        <div class="wv-status"><div class="wv-s-pill s-ready">✓ Listo para recoger</div></div>
-      </div>
-      <div class="wv-day">
-        <div class="wv-day-top"><div class="wv-day-name">Miércoles</div><div class="wv-day-kcal">1,200 kcal</div></div>
-        <div class="wv-dish"><div class="wv-dish-dot"></div>Huevos revueltos con nopales</div>
-        <div class="wv-dish"><div class="wv-dish-dot"></div>Salmón al horno + brócoli + quinoa</div>
-        <div class="wv-status"><div class="wv-s-pill s-prep">Preparando</div></div>
-      </div>
-      <div class="wv-formats">
-        <div class="wv-f-label">Plan recibido como</div>
-        <div class="wv-f-row"><span class="wv-f-pill">📸 Foto del plan</span><span class="wv-f-pill">Cualquier formato ✓</span></div>
-      </div>
-      <div class="wv-pickup">
-        <div class="wv-pickup-icon">📍</div>
-        <div>
-          <div class="wv-pickup-txt">Recoger en Escápate Café</div>
-          <div class="wv-pickup-sub">Hoy · 1:00 – 3:00 pm · Saltillo</div>
-        </div>
-      </div>
-    </div>
+    <div class="hero-img-overlay"></div>
+    <img class="hero-img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80&auto=format" alt="Comida saludable preparada">
   </div>
 </section>
 
-<!-- PARA QUIÉN -->
+<!-- ══ PARA QUIÉN ══ -->
 <section class="para-quien">
-  <div class="s-eyebrow">¿Esto es para ti?</div>
-  <h2 class="s-title">Para quien ya decidió<br><em>cuidarse en serio.</em></h2>
-  <p class="s-sub">No importa quién te dio el plan — tu nutrióloga, médico o especialista. Si tienes una prescripción real, la cocinamos.</p>
-  <div class="pq-grid">
-    <div class="pq-card">
-      <div class="pq-icon">⏰</div>
-      <div class="pq-title">Tienes el plan pero no tiempo de cocinarlo</div>
-      <div class="pq-desc">Trabajas, tienes hijos, o el día simplemente no alcanza. Tu plan es correcto — pero cocinar sano cada día no es realista para todo el mundo.</div>
-      <div class="pq-check">Kiwilu lo cocina por ti</div>
+  <div class="section-wrap">
+    <div class="pq-layout">
+      <div class="pq-left">
+        <div class="s-eyebrow">¿Esto es para ti?</div>
+        <h2 class="s-title">Para quien ya decidió<br><em>cuidarse en serio.</em></h2>
+        <p class="s-sub">No importa quién te dio el plan — tu nutrióloga, médico o especialista. Si tienes una prescripción real, la cocinamos.</p>
+      </div>
+    <div class="pq-list">
+      <div class="pq-item">
+        <div class="pq-dot">✓</div>
+        <div class="pq-text">Tienes el plan pero no tiempo de cocinarlo</div>
+      </div>
+      <div class="pq-item">
+        <div class="pq-dot">✓</div>
+        <div class="pq-text">Entiendes el plan pero no sabes prepararlo</div>
+      </div>
+      <div class="pq-item">
+        <div class="pq-dot">✓</div>
+        <div class="pq-text">Quieres cumplir al 100% esta vez</div>
+      </div>
     </div>
-    <div class="pq-card">
-      <div class="pq-icon">🥗</div>
-      <div class="pq-title">Entiendes el plan pero no sabes prepararlo</div>
-      <div class="pq-desc">Sabes qué debes comer y en qué cantidad. Pero convertir eso en platillos bien preparados día a día es otra habilidad — y no la necesitas para cumplir.</div>
-      <div class="pq-check">Nosotros lo hacemos bien</div>
-    </div>
-    <div class="pq-card">
-      <div class="pq-icon">🎯</div>
-      <div class="pq-title">Quieres cumplir al 100% esta vez</div>
-      <div class="pq-desc">Ya llevas semanas con el plan y siempre hay días que fallas. Quieres que esta vez los resultados en tu próxima consulta reflejen el esfuerzo real.</div>
-      <div class="pq-check">Adherencia real, sin excusas</div>
-    </div>
+    </div><!-- /pq-layout -->
   </div>
 </section>
 
-<!-- CÓMO FUNCIONA -->
-<section class="how" id="como-funciona">
-  <div class="s-eyebrow">El proceso</div>
-  <h2 class="s-title">Del plan al plato,<br>en <em>cuatro pasos.</em></h2>
-  <p class="s-sub">El primer paso ya lo hiciste. Los demás son nuestro trabajo.</p>
-  <div class="how-grid">
-    <div class="how-step">
-      <div class="how-num">1</div>
-      <div class="how-icon">📋</div>
-      <div class="how-title">Tienes tu plan nutricional</div>
-      <div class="how-desc">El que te dio tu nutrióloga, médico o especialista. En cualquier formato. Si no tienes uno, más abajo te decimos qué hacer.</div>
-      <span class="how-tag">Ya lo tienes ✓</span>
-    </div>
-    <div class="how-step">
-      <div class="how-num">2</div>
-      <div class="how-icon">📲</div>
-      <div class="how-title">Nos lo envías por WhatsApp</div>
-      <div class="how-desc">Mándanos el plan con el nombre del profesional que lo prescribió. Revisamos que sea un plan completo y te confirmamos inicio y precio.</div>
-      <span class="how-tag">2 minutos</span>
-    </div>
-    <div class="how-step">
-      <div class="how-num">3</div>
-      <div class="how-icon">👨‍🍳</div>
-      <div class="how-title">Cocinamos exactamente lo indicado</div>
-      <div class="how-desc">Cada platillo tal como está en tu plan: ingredientes, gramos, método de cocción. Sin sustituciones no autorizadas.</div>
-      <span class="how-tag">Fiel al plan</span>
-    </div>
-    <div class="how-step">
-      <div class="how-num">4</div>
-      <div class="how-icon">📍</div>
-      <div class="how-title">Recoges en Escápate Café</div>
-      <div class="how-desc">Te avisamos por WhatsApp cuando está listo. Pasas, recoges, y llevas tu semana de comidas resuelta.</div>
-      <span class="how-tag">Escápate Café · Saltillo</span>
-    </div>
-  </div>
-</section>
-
-<!-- TU PLAN EN CUALQUIER FORMATO -->
-<section class="formats">
-  <div class="formats-layout">
-    <div>
-      <div class="s-eyebrow">Sin restricciones</div>
-      <h2 class="s-title">Tu plan,<br>en el formato<br>que <em>tengas.</em></h2>
-      <p class="s-sub" style="margin-bottom:0">No tienes que conseguir un formato especial ni digitalizarlo. Lo recibimos como venga — solo necesita ser legible y provenir de un profesional de salud.</p>
-      <div class="disclaimer-box">
-        <div class="db-icon">⚠️</div>
-        <div>
-          <div class="db-title">Una cosa importante</div>
-          <div class="db-desc">Al enviarnos tu plan confirmas que fue prescrito por un profesional de la salud certificado. <strong>Si el plan contiene información incorrecta o no fue dado por un profesional, la responsabilidad es tuya.</strong> Cocinamos lo que nos indicas — tú garantizas que es una prescripción real.</div>
-        </div>
-      </div>
-    </div>
-    <div class="format-cards">
-      <div class="fcard">
-        <div class="fcard-icon">📄</div>
-        <div class="fcard-title">PDF o documento</div>
-        <div class="fcard-desc">El formato que generan la mayoría de los softwares de nutrición clínica.</div>
-        <span class="fcard-example">Lo más común</span>
-      </div>
-      <div class="fcard">
-        <div class="fcard-icon">📸</div>
-        <div class="fcard-title">Foto del plan</div>
-        <div class="fcard-desc">Una foto clara del plan en papel, impreso o en la pantalla de tu app.</div>
-        <span class="fcard-example">Muy frecuente</span>
-      </div>
-      <div class="fcard">
-        <div class="fcard-icon">✍️</div>
-        <div class="fcard-title">Escrito a mano</div>
-        <div class="fcard-desc">Si tu nutrióloga te lo anotó en papel con sus indicaciones personales.</div>
-        <span class="fcard-example">También válido</span>
-      </div>
-      <div class="fcard">
-        <div class="fcard-icon">💬</div>
-        <div class="fcard-title">Mensaje de WhatsApp</div>
-        <div class="fcard-desc">Si tu especialista te mandó el plan por mensaje o audio con indicaciones claras.</div>
-        <span class="fcard-example">Sin problema</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ¿AÚN NO TIENES PLAN? -->
-<section class="no-plan" id="sin-plan">
-  <div class="no-plan-banner">
-    <div class="npb-inner">
-      <div class="npb-eyebrow">¿Aún no tienes plan nutricional?</div>
-      <h2 class="npb-title">No hay problema —<br>tenemos una <em>opción para ti.</em></h2>
-      <p class="npb-sub">Para usar Kiwilu necesitas una prescripción de un profesional de salud. Si todavía no tienes una, aquí hay tres caminos según lo que buscas.</p>
-      <div class="routes-grid">
-
-        <div class="route-card route-main">
-          <div class="route-num">Opción 01</div>
-          <div class="route-icon">🩺</div>
-          <div class="route-title">Agrega una consulta a tu paquete</div>
-          <div class="route-desc">Incluye una consulta con una de nuestras nutriólogas aliadas directamente en tu plan Kiwilu. Ella diseña tu plan personalizado y lo cocinamos desde la primera semana. Todo en un solo proceso, sin coordinar por tu cuenta.</div>
-          <a href="directorio-nutriologas.html" class="route-btn">Ver nutriólogas disponibles →</a>
-        </div>
-
-        <div class="route-card route-ref">
-          <div class="route-num">Opción 02</div>
-          <div class="route-icon">📅</div>
-          <div class="route-title">Consulta primero, luego empieza</div>
-          <div class="route-desc">Agenda con cualquiera de las nutriólogas de nuestro directorio, obtén tu plan en consulta, y regresa con él a Kiwilu. Sin compromisos anticipados — cuando tengas tu prescripción, arrancamos.</div>
-          <a href="directorio-nutriologas.html" class="route-btn">Ver directorio de nutriólogas →</a>
-        </div>
-
-        <div class="route-card route-np">
-          <div class="route-num">Opción 03</div>
-          <div class="route-icon">🥗</div>
-          <div class="route-title">Solo quieres comer sano, sin dieta específica</div>
-          <div class="route-desc">Kiwilu cocina planes prescritos por profesionales. Si lo que buscas es comida saludable y balanceada sin una dieta personalizada, <strong>NutriPalm</strong> es exactamente eso — lonches y comidas para el día a día, sin necesitar prescripción.</div>
-          <a href="https://nutripalm.mx" class="route-btn">Conocer NutriPalm →</a>
-          <div class="np-note">Parte del ecosistema <a href="#">Nutrilú</a> · Saltillo</div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- QUÉ RECIBES -->
-<section class="receives" id="que-recibes">
-  <div class="receives-layout">
-    <div>
-      <div class="s-eyebrow">Lo que incluye</div>
-      <h2 class="s-title">Qué recibes cada<br><em>semana.</em></h2>
-      <p class="s-sub" style="margin-bottom:0">Más que comida en un contenedor — es tu plan, ejecutado con precisión.</p>
-      <div class="receives-list" style="margin-top:32px">
-        <div class="rv-item">
-          <div class="rv-num">🍱</div>
-          <div>
-            <div class="rv-head">Comidas preparadas según tu plan exacto</div>
-            <div class="rv-desc">Ingredientes, cantidades y métodos de cocción tal como están en tu prescripción. Sin sustituciones ni adaptaciones no autorizadas.</div>
-          </div>
-        </div>
-        <div class="rv-item">
-          <div class="rv-num">🏷️</div>
-          <div>
-            <div class="rv-head">Etiqueta con macros por comida</div>
-            <div class="rv-desc">Cada contenedor llega etiquetado con tu nombre, el tiempo de comida y los macros del día para llevar tu registro fácilmente.</div>
-          </div>
-        </div>
-        <div class="rv-item">
-          <div class="rv-num">📲</div>
-          <div>
-            <div class="rv-head">Aviso por WhatsApp cuando está listo</div>
-            <div class="rv-desc">Te notificamos en cuanto tu pedido está en Escápate Café. Sin esperar, sin preguntar.</div>
-          </div>
-        </div>
-        <div class="rv-item">
-          <div class="rv-num">🔄</div>
-          <div>
-            <div class="rv-head">Frecuencia según tu prescripción</div>
-            <div class="rv-desc">Recoges diario o por semana completa. Flexible y sin compromisos de largo plazo.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-visual">
+<!-- ══ MENÚ SEMANAL ══ -->
+<section class="menu-sec" id="como">
+  <div class="section-wrap">
+    <div class="menu-top">
       <div>
-        <div class="cv-label">Tu comida de hoy</div>
-        <div class="cv-title">Pollo al limón<br>con quinoa y espinacas</div>
-        <div class="cv-tag-row">
-          <div class="cv-tag">Comida</div><div class="cv-tag">Martes</div>
-          <div class="cv-tag">Al vapor</div><div class="cv-tag">Sin gluten</div>
-        </div>
+        <div class="s-eyebrow">Así recibirás tu comida</div>
+        <h2 class="s-title">Cumple tu plan nutricional<br><em>cada semana.</em></h2>
       </div>
-      <div class="cv-divider"></div>
-      <div>
-        <div style="font-size:10px;color:var(--goldd);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:8px">Información nutricional</div>
-        <div class="cv-macro-row">
-          <div class="cv-macro"><div class="cv-macro-v">470</div><div class="cv-macro-l">kcal</div></div>
-          <div class="cv-macro"><div class="cv-macro-v">40g</div><div class="cv-macro-l">proteína</div></div>
-          <div class="cv-macro"><div class="cv-macro-v">14g</div><div class="cv-macro-l">grasas</div></div>
-          <div class="cv-macro"><div class="cv-macro-v">38g</div><div class="cv-macro-l">carbos</div></div>
-        </div>
-      </div>
-      <div class="cv-footer">
-        <div class="cv-footer-icon">📍</div>
-        <div>
-          <div class="cv-footer-txt">Recoger en Escápate Café</div>
-          <div class="cv-footer-sub">Hoy · Listo desde la 1:00 pm</div>
-        </div>
-      </div>
-      <div class="cv-nut-credit">
-        <div class="cv-nut-av">LG</div>
-        <div class="cv-nut-txt">Plan prescrito por <span class="cv-nut-name">Lic. Laura González</span></div>
-      </div>
+      <p class="menu-top-right">La nutrióloga que elijas revisa tu prescripción, la interpreta y diseña un menú semanal específico para ti — dos opciones por día para que elijas. Solo tienes que recoger tu comida lista.</p>
     </div>
+    <div class="dtabs">
+      <button class="dtab active" onclick="showDish(0,this)">Lunes</button>
+      <button class="dtab" onclick="showDish(1,this)">Martes</button>
+      <button class="dtab" onclick="showDish(2,this)">Miércoles</button>
+      <button class="dtab" onclick="showDish(3,this)">Jueves</button>
+      <button class="dtab" onclick="showDish(4,this)">Viernes</button>
+    </div>
+    <div class="dshow" id="dshow"></div>
   </div>
 </section>
 
-<!-- PICKUP -->
-<section class="pickup">
-  <div class="pickup-grid">
-    <div class="pickup-card">
-      <div class="pc-badge">Punto de recolección oficial</div>
-      <div class="pc-name">Escápate Café</div>
-      <div class="pc-sub">Saltillo, Coahuila · Tu comida te espera aquí</div>
-      <div class="pc-hours">
-        <div class="pc-hour-row"><span class="pc-hour-day">Lunes – Viernes</span><span class="pc-hour-time">8:00 am – 7:00 pm</span></div>
-        <div class="pc-hour-row"><span class="pc-hour-day">Sábado</span><span class="pc-hour-time">9:00 am – 2:00 pm</span></div>
-        <div class="pc-hour-row"><span class="pc-hour-day">Domingo</span><span class="pc-hour-time">Cerrado</span></div>
-      </div>
-      <a href="#" class="pc-cta">Ver ubicación →</a>
-    </div>
+<!-- ══ FIDELIDAD AL PLAN ══ -->
+<section class="fidelidad">
+  <div class="fidelidad-layout">
     <div>
-      <div class="s-eyebrow">Sin complicaciones</div>
-      <h2 class="s-title">Pasa cuando te<br>quede <em>de camino.</em></h2>
-      <div class="pi-steps">
-        <div class="pi-step">
-          <div class="pi-step-num">1</div>
-          <div><div class="pi-step-head">Recibes aviso por WhatsApp</div><div class="pi-step-desc">Te notificamos cuando tu pedido está listo. Sabes exactamente cuándo pasar.</div></div>
+      <div class="s-eyebrow">Sin sustituciones</div>
+      <h2 class="s-title">Cada comida, exactamente como<br>lo indicó <em>tu especialista.</em></h2>
+      <p class="s-sub" style="margin-bottom:0">No interpretamos tu plan — lo ejecutamos. Cada detalle de tu prescripción se respeta sin excepción.</p>
+      <div class="fid-items">
+        <div class="fid-item">
+          <div class="fid-dot"></div>
+          <div>
+            <div class="fid-head">Gramos exactos según tu prescripción</div>
+            <div class="fid-desc">Las cantidades de cada ingrediente son las que indica tu plan — ni más, ni menos.</div>
+          </div>
         </div>
-        <div class="pi-step">
-          <div class="pi-step-num">2</div>
-          <div><div class="pi-step-head">Tu nombre en el contenedor</div><div class="pi-step-desc">Lo identificas de inmediato. Sin esperas, sin filas.</div></div>
+        <div class="fid-item">
+          <div class="fid-dot"></div>
+          <div>
+            <div class="fid-head">Los ingredientes que tu especialista indicó</div>
+            <div class="fid-desc">Sin sustituciones no autorizadas. Si un ingrediente no está disponible, te avisamos antes de cualquier cambio.</div>
+          </div>
         </div>
-        <div class="pi-step">
-          <div class="pi-step-num">3</div>
-          <div><div class="pi-step-head">Llevas la semana resuelta</div><div class="pi-step-desc">Contenedores sellados y etiquetados. Refrigera y calienta cuando los necesites.</div></div>
+        <div class="fid-item">
+          <div class="fid-dot"></div>
+          <div>
+            <div class="fid-head">El método de cocción de tu plan</div>
+            <div class="fid-desc">Al vapor, al horno, a la plancha — lo que diga tu prescripción es lo que va al plato.</div>
+          </div>
         </div>
       </div>
-      <a href="#empezar" class="btn-primary">Quiero empezar →</a>
+    </div>
+    <div class="fid-img-wrap">
+      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80&auto=format" alt="Comida saludable preparada en tupper">
+      <div class="fid-img-badge">
+        <div class="fid-badge-icon">✓</div>
+        <div>
+          <div class="fid-badge-txt">Fiel a tu prescripción</div>
+          <div class="fid-badge-sub">Ingredientes, gramos y método de cocción</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PRECIOS -->
-<section class="precios" id="precios">
-  <div class="s-eyebrow">Lo que cuesta</div>
-  <h2 class="s-title">Precios según<br>tu <em>plan.</em></h2>
-  <p class="s-sub">Dependen de lo que indica tu prescripción — tiempos de comida, ingredientes, días. Estos son rangos orientativos.</p>
-  <div class="price-grid">
-    <div class="price-card">
-      <div class="price-label">Plan básico</div>
-      <div class="price-val">Desde<br>$85</div>
-      <div class="price-per">por comida · sujeto al plan</div>
-      <div class="price-divider"></div>
-      <div class="price-items">
-        <div class="price-item"><div class="pi-check">✓</div>2 tiempos de comida al día</div>
-        <div class="price-item"><div class="pi-check">✓</div>Ingredientes estándar</div>
-        <div class="price-item"><div class="pi-check">✓</div>Etiqueta con macros</div>
-        <div class="price-item"><div class="pi-check">✓</div>Aviso por WhatsApp</div>
+<!-- ══ NUTRIÓLOGAS ══ -->
+<section class="nutriologas" id="nutriologas">
+  <div class="section-wrap">
+    <div class="s-eyebrow">Nutriólogas disponibles</div>
+    <h2 class="s-title">Elige la nutrióloga<br>que <em>cocina para ti.</em></h2>
+    <p class="s-sub">Compara perfiles, especialidades y precio por preparación. Los insumos van aparte — son exactamente lo que gastarías cocinando tú mismo.</p>
+    <div class="nut-grid">
+      <div class="nut-card">
+        <div class="nut-card-top">
+          <div class="nut-av a1">LG</div>
+          <div class="nut-meta">
+            <div class="nut-name">Laura González</div>
+            <div class="nut-title">Lic. Nutrición · UANL · 6 años exp.</div>
+            <div class="nut-stars">★★★★★ <span style="color:var(--mid);font-size:12px">4.9 · 38 reseñas</span></div>
+          </div>
+        </div>
+        <div class="nut-card-body">
+          <span class="nut-badge b1">Cocina clínica</span>
+          <div class="nut-price">$950</div>
+          <div class="nut-price-sub">por preparación · mensual</div>
+          <div class="nut-insumos">🛒 <strong>+ Insumos</strong> — lo que cuestan tus ingredientes</div>
+          <div class="nut-opciones"><span class="nop-icon">🍽️</span> 1 opción de platillo por día</div>
+          <div class="nut-plato">
+            <div class="nut-plato-label">🌟 Plato estrella</div>
+            <div class="nut-plato-name">Pollo al limón con quinoa y espinacas</div>
+            <div class="nut-plato-sub">Al vapor · Bajo sodio · Sin glutamato</div>
+          </div>
+          <div class="nut-cocina-para">
+            <div class="nut-cp-label">Cocina planes para</div>
+            <div class="nut-cp-tags">
+              <span class="nut-cp-tag">Diabetes</span>
+              <span class="nut-cp-tag">Hipertensión</span>
+              <span class="nut-cp-tag">Colesterol</span>
+            </div>
+          </div>
+          <div class="nut-features">
+            <div class="nut-feat">Proteínas: pollo, res, atún</div>
+            <div class="nut-feat">Técnica: al vapor y al horno</div>
+            <div class="nut-feat">Sin glutamato monosódico</div>
+            <div class="nut-feat">Índice glucémico bajo–moderado</div>
+          </div>
+        </div>
+        <div class="nut-card-foot">
+          <div class="nut-cupo">Cupo: <span>3 lugares disponibles</span></div>
+          <a href="#registro" class="nut-btn">Elegir →</a>
+        </div>
       </div>
-      <a href="#empezar" class="price-btn">Quiero este plan</a>
-    </div>
-    <div class="price-card featured">
-      <div class="pc-popular">Más solicitado</div>
-      <div class="price-label">Plan completo</div>
-      <div class="price-val">Desde<br>$130</div>
-      <div class="price-per">por día · 3 tiempos de comida</div>
-      <div class="price-divider"></div>
-      <div class="price-items">
-        <div class="price-item"><div class="pi-check">✓</div>3 tiempos de comida al día</div>
-        <div class="price-item"><div class="pi-check">✓</div>Ingredientes según tu prescripción</div>
-        <div class="price-item"><div class="pi-check">✓</div>Etiqueta con macros detallados</div>
-        <div class="price-item"><div class="pi-check">✓</div>Coordinación directa por WhatsApp</div>
-        <div class="price-item"><div class="pi-check">✓</div>Ajustes semanales sin costo</div>
+      <div class="nut-card">
+        <div class="nut-card-top">
+          <div class="nut-av a2">MR</div>
+          <div class="nut-meta">
+            <div class="nut-name">Mariana Reyes</div>
+            <div class="nut-title">Lic. Nutrición · Tec · 4 años exp.</div>
+            <div class="nut-stars">★★★★★ <span style="color:var(--mid);font-size:12px">4.8 · 22 reseñas</span></div>
+          </div>
+        </div>
+        <div class="nut-card-body">
+          <span class="nut-badge b2">Cocina deportiva</span>
+          <div class="nut-price">$1,100</div>
+          <div class="nut-price-sub">por preparación · mensual</div>
+          <div class="nut-insumos">🛒 <strong>+ Insumos</strong> — lo que cuestan tus ingredientes</div>
+          <div class="nut-opciones highlight"><span class="nop-icon">🍽️</span> 2 opciones de platillo por día</div>
+          <div class="nut-plato">
+            <div class="nut-plato-label">🌟 Plato estrella</div>
+            <div class="nut-plato-name">Bowl asiático de salmón con quinoa negra</div>
+            <div class="nut-plato-sub">Salteado ligero · Alto en proteína · Superalimentos</div>
+          </div>
+          <div class="nut-cocina-para">
+            <div class="nut-cp-label">Cocina planes para</div>
+            <div class="nut-cp-tags">
+              <span class="nut-cp-tag">Ganancia muscular</span>
+              <span class="nut-cp-tag">Control de glucosa</span>
+              <span class="nut-cp-tag">Alto rendimiento</span>
+            </div>
+          </div>
+          <div class="nut-features">
+            <div class="nut-feat">Proteínas: pollo, salmón, huevo</div>
+            <div class="nut-feat">Técnica: salteado ligero y horno</div>
+            <div class="nut-feat">Superalimentos en cada platillo</div>
+            <div class="nut-feat">Enfoque en control de glucosa</div>
+          </div>
+        </div>
+        <div class="nut-card-foot">
+          <div class="nut-cupo">Cupo: <span>5 lugares disponibles</span></div>
+          <a href="#registro" class="nut-btn">Elegir →</a>
+        </div>
       </div>
-      <a href="#empezar" class="price-btn">Quiero este plan</a>
-    </div>
-    <div class="price-card">
-      <div class="price-label">+ Consulta incluida</div>
-      <div class="price-val">Plan +<br>Consulta</div>
-      <div class="price-per">si aún no tienes prescripción</div>
-      <div class="price-divider"></div>
-      <div class="price-items">
-        <div class="price-item"><div class="pi-check">✓</div>Consulta con nutrióloga aliada</div>
-        <div class="price-item"><div class="pi-check">✓</div>Plan nutricional personalizado</div>
-        <div class="price-item"><div class="pi-check">✓</div>Cocina desde la semana 1</div>
-        <div class="price-item"><div class="pi-check">✓</div>Todo en un solo proceso</div>
+      <div class="nut-card">
+        <div class="nut-card-top">
+          <div class="nut-av a3">SC</div>
+          <div class="nut-meta">
+            <div class="nut-name">Sofía Cavazos</div>
+            <div class="nut-title">Lic. Nutrición · UAdeC · 8 años exp.</div>
+            <div class="nut-stars">★★★★★ <span style="color:var(--mid);font-size:12px">5.0 · 61 reseñas</span></div>
+          </div>
+        </div>
+        <div class="nut-card-body">
+          <span class="nut-badge b3">Cocina especializada</span>
+          <div class="nut-price">$1,350</div>
+          <div class="nut-price-sub">por preparación · mensual</div>
+          <div class="nut-insumos">🛒 <strong>+ Insumos</strong> — lo que cuestan tus ingredientes</div>
+          <div class="nut-opciones"><span class="nop-icon">🍽️</span> 1 opción de platillo por día</div>
+          <div class="nut-plato">
+            <div class="nut-plato-label">🌟 Plato estrella</div>
+            <div class="nut-plato-name">Bowl de res magra con arroz negro y aguacate</div>
+            <div class="nut-plato-sub">Al vapor · Alta proteína · Porciones generosas</div>
+          </div>
+          <div class="nut-cocina-para">
+            <div class="nut-cp-label">Cocina planes para</div>
+            <div class="nut-cp-tags">
+              <span class="nut-cp-tag">Renal</span>
+              <span class="nut-cp-tag">Hepático</span>
+              <span class="nut-cp-tag">Oncológico</span>
+            </div>
+          </div>
+          <div class="nut-features">
+            <div class="nut-feat">Proteínas: res, pollo, salmón, huevo</div>
+            <div class="nut-feat">Técnica: al vapor exclusivamente</div>
+            <div class="nut-feat">Coordinación con médico tratante</div>
+            <div class="nut-feat" style="color:var(--light)">Lista de espera — cupo lleno</div>
+          </div>
+        </div>
+        <div class="nut-card-foot">
+          <div class="nut-cupo" style="color:var(--light)">Cupo lleno por ahora</div>
+          <a href="#registro" class="nut-btn wait">Lista de espera →</a>
+        </div>
       </div>
-      <a href="directorio-nutriologas.html" class="price-btn">Ver nutriólogas aliadas</a>
     </div>
+    <p class="nut-note">Los precios por preparación son fijados por cada nutrióloga independiente. Kiwilu actúa como plataforma intermediaria.</p>
   </div>
-  <div class="price-note"><strong>El precio exacto depende de tu plan específico.</strong> Envíanos tu prescripción y te damos el costo real antes de confirmar. Sin sorpresas.</div>
 </section>
 
-<!-- TESTIMONIALES -->
-<section class="testi">
-  <div class="testi-header">
-    <h2 class="testi-title">Lo que dicen quienes<br>ya <em>cumplen el plan.</em></h2>
-  </div>
-  <div class="testi-grid">
-    <div class="tcard">
-      <div class="tcard-stars">★★★★★</div>
-      <div class="tcard-quote">"Llevaba cuatro meses con el plan sin cumplirlo. En las primeras dos semanas con Kiwilu bajé lo que no había logrado en todo ese tiempo."</div>
-      <div class="tcard-div"></div>
-      <div class="tcard-name">Sofía R.</div>
-      <div class="tcard-role">Plan de pérdida de peso · 5 semanas activa</div>
-      <div class="tcard-nut">Plan de la Lic. Ana Torres</div>
+
+<!-- ══ FORMULARIO ══ -->
+<section class="registro-wrap" id="registro">
+  <div class="registro-inner">
+    <div id="form-state">
+      <div class="form-eyebrow">Empieza hoy</div>
+      <h2 class="form-title">Cuéntanos <em>quién eres.</em></h2>
+      <p class="form-sub">Te contactamos en menos de 24 horas por WhatsApp con tu cotización y los próximos pasos.</p>
+
+      <div class="field-row">
+        <div class="field"><label>Nombre</label><input type="text" id="f-nombre" placeholder="Tu nombre"></div>
+        <div class="field"><label>Apellido</label><input type="text" id="f-apellido" placeholder="Tu apellido"></div>
+      </div>
+      <div class="field">
+        <label>WhatsApp</label>
+        <input type="tel" id="f-whatsapp" placeholder="00 0000 0000">
+        <div class="field-hint">Te escribimos aquí con tu cotización y próximos pasos.</div>
+      </div>
+      <div class="field">
+        <label>Correo electrónico</label>
+        <input type="email" id="f-email" placeholder="tu@correo.com">
+      </div>
+      <div class="field">
+        <label>¿Cuál es tu objetivo de salud?</label>
+        <div class="select-wrap">
+          <select id="f-objetivo">
+            <option value="">Seleccionar objetivo</option>
+            <option value="diabetes">Controlar mi diabetes</option>
+            <option value="peso">Bajar de peso</option>
+            <option value="hipertension">Controlar mi hipertensión</option>
+            <option value="colesterol">Controlar mi colesterol / triglicéridos</option>
+            <option value="musculo">Ganar músculo / masa</option>
+            <option value="digestion">Mejorar mi digestión</option>
+            <option value="otro">Otro objetivo</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>¿Cuentas con plan nutricional actualmente?</label>
+        <div class="select-wrap">
+          <select id="f-plan" onchange="checkPlan(this)">
+            <option value="">Seleccionar opción</option>
+            <option value="si">Sí, tengo plan nutricional</option>
+            <option value="consulta">No. Quiero una consulta nutricional</option>
+            <option value="sano">No. Solo quiero comer saludable</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="nutripalm-alert" id="nutripalm-alert">
+        <div class="na-title">Te recomendamos NutriPalm</div>
+        <div class="na-sub">Para comida saludable sin plan específico, NutriPalm es el servicio ideal dentro del mismo ecosistema. <a href="#" class="na-link">Ver NutriPalm →</a></div>
+      </div>
+
+      <div class="field">
+        <label>¿Cómo nos encontraste? <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size:11px">(opcional)</span></label>
+        <div class="select-wrap">
+          <select id="f-como">
+            <option value="">Seleccionar</option>
+            <option>Recomendación de un amigo o familiar</option>
+            <option>Mi nutrióloga / médico me lo recomendó</option>
+            <option>Instagram / Facebook</option>
+            <option>En cafetería local</option>
+            <option>Hospital o clínica</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="submitForm()">Registrarme →</button>
+      <p class="form-legal">Sin contratos. Cancela cuando quieras.</p>
     </div>
-    <div class="tcard">
-      <div class="tcard-stars">★★★★★</div>
-      <div class="tcard-quote">"No sé cocinar. Con Kiwilu por fin puedo seguir el plan de mi médico sin depender de nadie ni comer fuera todos los días."</div>
-      <div class="tcard-div"></div>
-      <div class="tcard-name">Carlos V.</div>
-      <div class="tcard-role">Control de glucosa · 8 semanas activo</div>
-      <div class="tcard-nut">Plan prescrito por médico tratante</div>
-    </div>
-    <div class="tcard">
-      <div class="tcard-stars">★★★★★</div>
-      <div class="tcard-quote">"Mandé la foto del plan escrito a mano y al día siguiente ya estaba cocinado. No esperaba que fuera tan fácil empezar."</div>
-      <div class="tcard-div"></div>
-      <div class="tcard-name">Patricia M.</div>
-      <div class="tcard-role">Nutrición deportiva · 3 semanas activa</div>
-      <div class="tcard-nut">Plan recibido como foto — cualquier formato</div>
+
+    <div class="form-success" id="form-success">
+      <div class="success-icon">🎉</div>
+      <h2 class="success-title">¡Listo,<br><em>ya estás dentro!</em></h2>
+      <p class="success-sub">Recibimos tu registro. Te contactamos por WhatsApp en menos de 24 horas con tu cotización y los próximos pasos.</p>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- ══ FAQ ══ -->
 <section class="faq">
-  <div style="text-align:center;margin-bottom:48px">
-    <div class="s-eyebrow" style="justify-content:center">Resolvemos tus dudas</div>
-    <h2 class="s-title" style="margin:0 auto;max-width:480px">Preguntas <em>frecuentes.</em></h2>
-  </div>
-  <div class="faq-wrap">
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">¿Mi nutrióloga tiene que estar registrada en Kiwilu?<div class="faq-icon">+</div></div>
-      <div class="faq-a">No. Puedes traer el plan de cualquier nutrióloga, médico o especialista de salud — no necesita ser parte de nuestra red. Solo debes indicarnos quién lo prescribió y confirmar que la información es válida.</div>
+  <div class="faq-inner">
+    <div class="faq-top">
+      <h2 class="faq-top-title">Preguntas <em>frecuentes.</em></h2>
+      <p class="faq-top-sub">Si tu pregunta no está aquí, regístrate y te contactaremos.</p>
     </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si no tengo plan nutricional todavía?<div class="faq-icon">+</div></div>
-      <div class="faq-a">Tienes dos opciones dentro de Kiwilu: agregar una consulta con una nutrióloga aliada directamente a tu paquete, o agendar primero tu consulta del directorio y empezar cuando tengas el plan. Si solo quieres comer sano sin dieta personalizada, te recomendamos NutriPalm — parte del mismo ecosistema Nutrilú.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">¿En qué formato envío el plan?<div class="faq-icon">+</div></div>
-      <div class="faq-a">Cualquiera: PDF, foto, captura de pantalla, mensaje de WhatsApp o documento de Word. Lo importante es que esté legible e incluya los alimentos, cantidades y tiempos de comida indicados.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">¿Hacen sustituciones si no consiguen algún ingrediente?<div class="faq-icon">+</div></div>
-      <div class="faq-a">Solo si el ingrediente no está disponible y la sustitución es equivalente en macros. En ese caso te avisamos antes de hacerlo. Si hay restricciones estrictas en tu plan, lo indicamos al recibirlo y buscamos solución contigo.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">¿Mi plan puede venir de un médico que no es nutriólogo?<div class="faq-icon">+</div></div>
-      <div class="faq-a">Sí. Aceptamos indicaciones de cualquier profesional de la salud certificado: nutriólogo, médico, endocrinólogo, internista, etc. Al enviarnos el plan confirmas que proviene de una fuente profesional válida.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">¿Qué incluye el plan con consulta?<div class="faq-icon">+</div></div>
-      <div class="faq-a">Una consulta con la nutrióloga aliada que elijas del directorio, más el servicio de cocina desde la primera semana. Ella te hace el plan en consulta y nos lo envía directamente — tú no tienes que coordinar nada por tu cuenta.</div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Mi nutrióloga tiene que estar registrada en Kiwilu?<span class="faq-icon">+</span></div><div class="faq-a"><div class="faq-a-inner">No. Puedes traer el plan de cualquier nutrióloga, médico o especialista de salud. Solo confirmas que fue prescrito por un profesional certificado.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Qué incluye el precio de preparación?<span class="faq-icon">+</span></div><div class="faq-a"><div class="faq-a-inner">El precio de preparación cubre el trabajo de la nutrióloga: interpretar tu plan, cocinar con fidelidad a tu prescripción y tener listo tu pedido. Los insumos (ingredientes) se cobran aparte — son exactamente lo que gastarías comprándolos tú mismo.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Puedo cancelar en cualquier momento?<span class="faq-icon">+</span></div><div class="faq-a"><div class="faq-a-inner">Sí. Puedes contratar desde una sola semana y cancelar cuando quieras, sin penalizaciones.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Hacen sustituciones si falta algún ingrediente?<span class="faq-icon">+</span></div><div class="faq-a"><div class="faq-a-inner">Solo si el ingrediente no está disponible y la sustitución es equivalente en macros. Te avisamos antes de hacerlo. Si tu plan tiene restricciones estrictas, se coordina contigo directamente.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Mi plan puede venir de un médico que no es nutriólogo?<span class="faq-icon">+</span></div><div class="faq-a"><div class="faq-a-inner">Sí. Aceptamos indicaciones de cualquier profesional de la salud certificado: nutriólogo, médico, endocrinólogo, internista, cardiólogo, etc.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Puedo cambiar de nutrióloga después de registrarme?<span class="faq-icon">+</span></div><div class="faq-a"><div class="faq-a-inner">Sí. Puedes cambiar de nutrióloga en cualquier momento desde tu cuenta, sin cancelar tu plan.</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="cta-final" id="empezar">
-  <div class="cta-eyebrow">Empieza esta semana</div>
-  <h2 class="cta-title">Tu plan ya existe.<br>Solo falta <em>cocinarlo.</em></h2>
-  <p class="cta-sub">Escríbenos por WhatsApp con tu plan — en el formato que tengas — y en menos de 24 horas te confirmamos inicio y precio exacto.</p>
-  <div class="cta-actions">
-    <a href="https://wa.me/528001234567" class="btn-primary">Enviar mi plan por WhatsApp →</a>
-    <a href="directorio-nutriologas.html" class="btn-ghost-dark">No tengo plan — ver nutriólogas</a>
-  </div>
-  <p class="cta-note">¿Eres nutrióloga y quieres cocinar? <a href="nutriologa-kiwilu.html">Únete a la red →</a></p>
-</section>
+<!-- ══ DIVISOR ══ -->
+<div class="faq-divider"></div>
 
-<div class="strip">
-  <div class="strip-left">kiwilu<span>.co</span></div>
-  <div class="strip-links">
-    <a href="index.html">Inicio</a>
-    <a href="nutriologa-kiwilu.html">Para nutriólogas</a>
-    <a href="directorio-nutriologas.html">Directorio</a>
-    <a href="#">Escápate Café</a>
-  </div>
-</div>
+<!-- ══ FOOTER ══ -->
 <footer>
-  <div class="flogo">Kiwi<span>lu</span></div>
-  <div class="flinks">
+  <div class="f-logo">Kiwi<em>lu</em></div>
+  <div class="f-links">
     <a href="#">Términos y condiciones</a>
     <a href="#">Aviso de privacidad</a>
     <a href="#">Contacto</a>
   </div>
-  <div class="ftxt">Saltillo, Coahuila · 2026 · Ecosistema Nutrilú</div>
+  <div class="f-copy">2026 · Ecosistema Nutrilú</div>
 </footer>
 
 <script>
 function toggleFaq(el){
-  const a=el.nextElementSibling,i=el.querySelector('.faq-icon'),open=a.classList.contains('open');
+  const a=el.nextElementSibling,icon=el.querySelector('.faq-icon'),open=a.classList.contains('open');
   document.querySelectorAll('.faq-a').forEach(x=>x.classList.remove('open'));
   document.querySelectorAll('.faq-icon').forEach(x=>x.classList.remove('open'));
-  if(!open){a.classList.add('open');i.classList.add('open')}
+  if(!open){a.classList.add('open');icon.classList.add('open');}
+}
+
+/* ── Menú semanal ── */
+const M=[
+  {day:'Lunes',emoji:'🍋',color:'#E6F5F0',name:'Pollo al limón con quinoa y verduras asadas',gi:'Bajo–Moderado (45–50)',gil:true,ingredients:['Pechuga de pollo','Quinoa','Calabacita','Zanahoria','Pimiento morrón','Limón','Ajo','Aceite de oliva'],nutrition:[{v:'470',l:'kcal'},{v:'40g',l:'proteína'},{v:'14g',l:'grasas'},{v:'40g',l:'carbos'},{v:'6g',l:'fibra'}],vitamins:['Potasio','Hierro','Zinc','Calcio','Vitamina B6','Niacina B3'],benefits:['Fuente magra de proteína para mantenimiento muscular','Ayuda a la digestión por su contenido en fibra','Aporta energía limpia y sostenida sin picos de glucosa']},
+  {day:'Martes',emoji:'🐟',color:'#E6F1FB',name:'Salmón glaseado con miel y mostaza + puré de coliflor',gi:'Bajo (40–45)',gil:true,ingredients:['Salmón fresco','Miel','Mostaza Dijon','Coliflor','Brócoli','Aceite de oliva','Limón','Ajo'],nutrition:[{v:'510',l:'kcal'},{v:'36g',l:'proteína'},{v:'28g',l:'grasas'},{v:'28g',l:'carbos'},{v:'6g',l:'fibra'}],vitamins:['Vitamina D','B12','Vitamina C','Folato','Magnesio','Omega-3'],benefits:['Antiinflamatorio natural por omega-3','Apoya la salud cognitiva y cardiovascular','Estabiliza niveles de glucosa en sangre']},
+  {day:'Miércoles',emoji:'🥩',color:'#FAECE7',name:'Bowl de res salteada con quinoa y vegetales asados',gi:'Bajo–Moderado (50–53)',gil:true,ingredients:['Aguayón de res 150g','Quinoa cocida','Zanahoria','Pimiento rojo','Espinaca','Aceite de oliva','Orégano'],nutrition:[{v:'490',l:'kcal'},{v:'36g',l:'proteína'},{v:'15g',l:'grasas'},{v:'38g',l:'carbos'},{v:'6g',l:'fibra'}],vitamins:['Hierro hemo','Zinc','Vitamina B12','Vitamina A','Vitamina C','Vitamina K'],benefits:['Rica en hierro — previene anemia','Proteína completa para desarrollo muscular','Bajo IG para energía estable todo el día']},
+  {day:'Jueves',emoji:'🍗',color:'#FBF4E6',name:'Pollo a la mostaza con arroz integral y verduras salteadas',gi:'Moderado (50–55)',gil:false,ingredients:['Pechuga de pollo','Mostaza Dijon','Ajo','Cebolla','Calabacita','Zanahoria','Arroz integral','Aceite de oliva'],nutrition:[{v:'480',l:'kcal'},{v:'40g',l:'proteína'},{v:'14g',l:'grasas'},{v:'42g',l:'carbos'},{v:'5g',l:'fibra'}],vitamins:['Vitamina B6','Vitamina A','Vitamina C','Magnesio','Zinc','Potasio'],benefits:['Favorece la digestión y el tránsito intestinal','Apoya la salud cardiovascular','Alta saciedad por proteína + fibra del arroz integral']},
+  {day:'Viernes',emoji:'🫙',color:'#EEEDFE',name:'Bowl mediterráneo de pollo con quinoa y salsa de yogurt',gi:'Bajo–Moderado (45–50)',gil:true,ingredients:['Pollo asado','Quinoa cocida','Pepino','Jitomate cherry','Cebolla morada','Aceitunas negras','Yogur natural','Limón'],nutrition:[{v:'490',l:'kcal'},{v:'42g',l:'proteína'},{v:'15g',l:'grasas'},{v:'42g',l:'carbos'},{v:'6g',l:'fibra'}],vitamins:['Vitamina B6','Niacina B3','Vitamina A','Calcio','Hierro','Magnesio','Zinc'],benefits:['Probióticos del yogurt favorecen la digestión','Mayor variedad de micronutrientes','Combinación mediterránea antiinflamatoria']}
+];
+
+function showDish(i,btn){
+  document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const d=M[i];
+  document.getElementById('dshow').innerHTML=`
+    <div class="dvis" style="background:${d.color}">
+      <div class="dvbg">${d.emoji}</div>
+      <div class="dvday">${d.day}</div>
+      <div class="dvname">${d.name}</div>
+      <div class="gipill"><div class="gidot ${d.gil?'gilow':'gimid'}"></div>Índice glucémico ${d.gi}</div>
+    </div>
+    <div class="dinfo">
+      <div class="ib"><div class="ibt">Ingredientes</div><div class="tagcloud">${d.ingredients.map(x=>`<span class="itag">${x}</span>`).join('')}</div></div>
+      <div class="ib"><div class="ibt">Información nutricional</div><div class="nrow">${d.nutrition.map(n=>`<div class="nc"><div class="ncv">${n.v}</div><div class="ncl">${n.l}</div></div>`).join('')}</div></div>
+      <div class="ib"><div class="ibt">Vitaminas y minerales</div><div class="tagcloud">${d.vitamins.map(x=>`<span class="vtag">${x}</span>`).join('')}</div></div>
+      <div class="ib"><div class="ibt">Beneficios para la salud</div>${d.benefits.map(x=>`<div class="ben"><div class="bdot"></div>${x}</div>`).join('')}</div>
+    </div>`;
+}
+showDish(0,document.querySelector('.dtab.active'));
+
+function checkPlan(sel){
+  document.getElementById('nutripalm-alert').classList.toggle('visible', sel.value === 'sano');
+}
+
+function submitForm(){
+  const ids=['f-nombre','f-apellido','f-whatsapp','f-email'];
+  let ok=true;
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    el.style.borderColor='';
+    if(!el.value.trim()){el.style.borderColor='#dc3545';ok=false;}
+  });
+  if(!document.getElementById('f-objetivo').value) ok=false;
+  if(!document.getElementById('f-plan').value) ok=false;
+  if(!ok) return;
+  document.getElementById('form-state').style.display='none';
+  document.getElementById('form-success').classList.add('visible');
 }
 </script>
 </body>
